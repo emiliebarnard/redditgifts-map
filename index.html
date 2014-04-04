@@ -89,7 +89,6 @@
 	
 		/* This allows the user to press enter rather than the start encryption button while in the rule number form box */
 		  $("input").keypress(function(event) {
-/* 		  	alert($('#postCode').val().localeCompare("#########")); */
 		    if (event.which == 13 && $('#postCode').val().localeCompare("#########") != 0) {
 		        $("#dropPinButton").click();
 		    }

@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+
+<!--
+redditgifts map maker, an open source project hosted by emilie barnard
+emiliebarnard.com
+-->
+
 <html>
   <head>
   <title>redditgifts Map Maker</title>
@@ -20,9 +26,12 @@
 	    	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
 	    </script>
 	    
+	    <script type="text/javascript" src="/redditgiftsmapmaker/retina.js"></script>
+	    
 	    <script type="text/javascript">
 	    
 	    var iconSize = 50;
+	    var homeIconDim = 28;
 	    var map;
 	    
 	      function initialize() {
@@ -96,10 +105,10 @@
 				var pinPos = new google.maps.LatLng(lat, lng);
 				
 				var pinImg = {
-				    url: 'http://www.fluffaykitties.com/jemimaup1.png',
-				    scaledSize: new google.maps.Size(iconSize, iconSize),
+				    url: 'home@2x.png',
+				    scaledSize: new google.maps.Size(homeIconDim, homeIconDim),
 				    origin: new google.maps.Point(0, 0),
-				    anchor: new google.maps.Point(iconSize/2, iconSize/2)
+				    anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
 				};
 				
 				

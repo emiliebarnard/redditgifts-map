@@ -46,6 +46,8 @@
 		  var geocoder;
 		  var markersArray = new Array();
 		  
+  		var mapURL = "http://maps.googleapis.com/maps/api/staticmap?size=480x480&markers=icon:http://chart.apis.google.com/chart?chst=d_map_pin_icon%26chld=cafe%257C996600%7C224+West+20th+Street+NY%7C75+9th+Ave+NY%7C700+E+9th+St+NY&sensor=true";
+		  
 		function dropPin(){
 			geocoder = new google.maps.Geocoder();
 			var post = $('#postCode').val();
@@ -74,6 +76,7 @@
 				
 				markersArray.push(pinMarker);
 				document.getElementById("undoPinButton").disabled = false;
+				document.getElementById("mapLinkButton").disabled = false;
 			});			
 		};
 		
@@ -82,6 +85,11 @@
 			if (pinToUndo != null){
 				pinToUndo.setMap(null);
 				markersArray.pop();
+				if (markersArray[markersArray.length-1] == null){
+					document.getElementById("undoPinButton").disabled = true;
+					document.getElementById("mapLinkButton").disabled = true;
+
+				}
 			}
 		};
 		
@@ -105,6 +113,7 @@
   	<br>
   	<input id="dropPinButton" type="button" onclick="dropPin()" value="Drop Pin!"> 
   	<input id="undoPinButton" type="button" onclick="undoPin()" value="Undo Pin" disabled>
+  	<input id="mapLinkButton" type="button" onclick="window.open(mapURL)" value="Generate Image" disabled>
   	</p>
     <div id="map-canvas"></div>
     <div id="copyright">This site is not affiliated with nor endorsed by <a href="http://www.reddit.com">reddit</a> or <a href="http://www.redditgifts.com">redditgifts</a>.<br><br>Emilie Menard Barnard<br><a href="http://www.reddit.com/user/Fluffaykitties/">u/fluffaykitties</a><br><a href="http://emiliebarnard.com">emiliebarnard.com</a></div>

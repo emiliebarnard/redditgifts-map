@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Redditgifts Map Maker</title>
+  <title>redditgifts Map Maker</title>
   <link rel="stylesheet" type="text/css" href="stylesheet.css" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   
@@ -44,6 +44,7 @@
 		  
 		  google.maps.event.addDomListener(window, 'load', initialize);
 		  var geocoder;
+		  var markersArray = new Array();
 		  
 		function dropPin(){
 			geocoder = new google.maps.Geocoder();
@@ -70,15 +71,26 @@
 					icon: pinImg,
 					title: "MEOW"
 				});
-
+				
+				markersArray.push(pinMarker);
+				document.getElementById("undoPinButton").disabled = false;
 			});			
+		};
+		
+		function undoPin(){
+			pinToUndo = markersArray[markersArray.length-1];
+			if (pinToUndo != null){
+				pinToUndo.setMap(null);
+				markersArray.pop();
+			}
 		};
 		
 		$(document).ready(function(){
 	
 		/* This allows the user to press enter rather than the start encryption button while in the rule number form box */
 		  $("input").keypress(function(event) {
-		    if (event.which == 13 ) {
+/* 		  	alert($('#postCode').val().localeCompare("#########")); */
+		    if (event.which == 13 && $('#postCode').val().localeCompare("#########") != 0) {
 		        $("#dropPinButton").click();
 		    }
 	  }); 
@@ -92,9 +104,10 @@
   	<p>
   	Post Code: <input type="text" id="postCode" size="10" value="#########">
   	<br>
-  	<input id="dropPinButton" type="button" onclick="dropPin()" value="Drop Pin!">
+  	<input id="dropPinButton" type="button" onclick="dropPin()" value="Drop Pin!"> 
+  	<input id="undoPinButton" type="button" onclick="undoPin()" value="Undo Pin" disabled>
   	</p>
     <div id="map-canvas"></div>
-    <div id="copyright">Emilie Menard Barnard<br><a href="http://www.reddit.com/user/Fluffaykitties/">u/fluffaykitties</a><br><a href="http://emiliebarnard.com">emiliebarnard.com</a><br><a href="http://redditgifts.com">redditgifts.com</a></div>
+    <div id="copyright">This site is not affiliated with nor endorsed by <a href="http://www.reddit.com">reddit</a> or <a href="http://www.redditgifts.com">redditgifts</a>.<br><br>Emilie Menard Barnard<br><a href="http://www.reddit.com/user/Fluffaykitties/">u/fluffaykitties</a><br><a href="http://emiliebarnard.com">emiliebarnard.com</a></div>
   </body>
 </html>

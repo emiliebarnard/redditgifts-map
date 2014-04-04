@@ -16,7 +16,15 @@
 	      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBauEtRQ17iTKbRU3wC4QdFJ9ZzgJeHFF8&sensor=true">
 	    </script>
 	    
+	    <script type="text/javascript"
+	    	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+	    </script>
+	    
 	    <script type="text/javascript">
+	    
+	    var iconSize = 50;
+	    var map;
+	    
 	      function initialize() {
 	       
 	        var mapOptions = {
@@ -24,10 +32,9 @@
 	          zoom: 12
 	        };
 	       
-	        var map = new google.maps.Map(document.getElementById("map-canvas"),
+	        map = new google.maps.Map(document.getElementById("map-canvas"),
 	            mapOptions);
 	            
-	        var iconSize = 50;
 	            
 	        var ucsbPos = new google.maps.LatLng(34.414899, -119.84312);
 	        
@@ -44,16 +51,52 @@
 				icon: ucsbLogo,
 				title: "UC Santa Barbara"
 			});
+			
+			var geocoder;
 		}
 	      
 		  
 		  google.maps.event.addDomListener(window, 'load', initialize);
+		  
+		function dropPin(){
+			geocoder = geocoder = new google.maps.Geocoder();
+			var post = $('#postCode').val();
+			var lat;
+			var lng;
+			geocoder.geocode({address: post},
+			function(results_array, status) { 
+				lat = results_array[0].geometry.location.lat();
+				lng = results_array[0].geometry.location.lng();
+			
+				var pinPos = new google.maps.LatLng(lat, lng);
+				
+				var pinImg = {
+				    url: 'http://www.fluffaykitties.com/jemimaup1.png',
+				    scaledSize: new google.maps.Size(iconSize, iconSize),
+				    origin: new google.maps.Point(0, 0),
+				    anchor: new google.maps.Point(iconSize/2, iconSize/2)
+				};
+				
+				var pinMarker = new google.maps.Marker({
+					position: pinPos,
+					map: map,
+					icon: pinImg,
+					title: "MEOW"
+				});
+
+			});			
+		};
 	    </script>
     
   </head>
   <body>
   	<h1>Redditgifts Map Maker</h1>
+  	<p>
+  	Post Code: <input type="text" id="postCode" size="10" value="#########">
+  	<br>
+  	<input id="dropPinButton" type="button" onclick="dropPin()" value="Drop Pin!">
+  	</p>
     <div id="map-canvas"></div>
-    <div id="copyright">Emilie Menard Barnard<br><a href="http://emiliebarnard.com">emiliebarnard.com</a><br><a href="http://redditgifts.com">redditgifts.com</a></div>
+    <div id="copyright">Emilie Menard Barnard<br>u/fluffaykitties<br><a href="http://emiliebarnard.com">emiliebarnard.com</a><br><a href="http://redditgifts.com">redditgifts.com</a></div>
   </body>
 </html>

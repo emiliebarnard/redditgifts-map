@@ -23,7 +23,7 @@ a:link, a:active, a:visited, a {
 }
 
 a:hover b, a:hover {
-	color: #cccccc;
+	color: #cccccc !important;
 }
 
 h1 {
@@ -68,6 +68,11 @@ h2 {
 	
 }
 
+.homeContent a:link, a:active, a:visited, a {
+	color: #000000;
+	text-decoration:none
+}
+
 .pinContent {
 	width: 97px;
 }
@@ -80,4 +85,9 @@ h2 {
     margin-left: auto ;
     margin-right: auto ;
 	
+}
+
+.pinContent a:link, a:active, a:visited, a {
+	color: #000000;
+	text-decoration:none
 }

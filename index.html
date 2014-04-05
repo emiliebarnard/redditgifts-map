@@ -62,9 +62,18 @@ emiliebarnard.com
 		function dropPin(){
 			geocoder = new google.maps.Geocoder();
 			var post = $('#postCode').val();
+			var username = $('#gifteeUsername').val();
 			var lat;
 			var lng;
-			var pinDialog = '<div class="pinContent">'+'<p>Meow =^.^=</p>'+'</div>';
+			var pinDialog = '<div class="pinContent">';
+			
+			if (username.localeCompare("") != 0){
+				pinDialog += '<p>Giftee: <a href="http://reddit.com/u/' + username + '" target="_blank">/u/' + username + '</a><br>Meow =^.^=</p>'+'</div>';
+			}
+			else {
+				pinDialog += '<p>Meow =^.^=</p>' + '</div>'
+			}
+			
 			var pinWindow = new google.maps.InfoWindow({
 		      content: pinDialog,
 		      maxWidth: 97
@@ -106,9 +115,18 @@ emiliebarnard.com
 			homeMarker = null;
 			geocoder = new google.maps.Geocoder();
 			var post = $('#home').val();
+			var user = $('#homeUsername').val();
+
 			var lat;
 			var lng;
-			var homeDialog = '<div class="homeContent">'+'<p>Home Sweet Home</p>'+'</div>';
+			var homeDialog = '<div class="homeContent">';
+			
+			if (user.localeCompare("") != 0){
+				homeDialog += '<p>Home of <a href="http://reddit.com/u/' + user + '" target="_blank">/u/' + user + '</a></p>' + '</div>';
+			}
+			else{
+				homeDialog += '<p>Home Sweet Home</p>' + '</div>';
+			}
 			var homeWindow = new google.maps.InfoWindow({
 			      content: homeDialog,
 			      maxWidth: 97
@@ -173,16 +191,17 @@ emiliebarnard.com
   	<h1><span style="color:#ff5700">reddit</span><span style="color:#336699">gifts</span> Map Maker</h1>
   	<p>
   	Home: <input type="text" id="home" size="10" value="#########"><br>
+  	Your username: <input type="text" id="homeUsername" size="10" value=""><br>
   	<input id="setHomeButton" type="button" onclick="setHome()" value="Set Home Location">
   	<br>
   	<br>
-  	Post Code: <input type="text" id="postCode" size="10" value="#########">
-  	<br>
+  	Post Code: <input type="text" id="postCode" size="10" value="#########"><br>
+  	Giftee username: <input type="text" id="gifteeUsername" size="10" value=""><br>
   	<input id="dropPinButton" type="button" onclick="dropPin()" value="Drop Pin!"> 
   	<input id="undoPinButton" type="button" onclick="undoPin()" value="Undo Pin" disabled>
   	<input id="mapLinkButton" type="button" onclick="window.open(mapURL)" value="Generate Image" disabled>
   	</p>
     <div id="map-canvas"></div>
-    <div id="copyright">This site is not affiliated with nor endorsed by <a href="http://www.reddit.com">reddit</a> or <a href="http://www.redditgifts.com">redditgifts</a>.<br><br>Emilie Menard Barnard<br><a href="http://www.reddit.com/user/Fluffaykitties/">u/fluffaykitties</a><br><a href="http://emiliebarnard.com">emiliebarnard.com</a></div>
+    <div id="copyright">This site is not affiliated with nor endorsed by <a href="http://www.reddit.com">reddit</a> or <a href="http://www.redditgifts.com">redditgifts</a>.<br><br>Emilie Menard Barnard<br><a href="http://www.reddit.com/user/Fluffaykitties/">/u/fluffaykitties</a><br><a href="http://emiliebarnard.com">emiliebarnard.com</a></div>
   </body>
 </html>

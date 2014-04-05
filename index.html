@@ -135,6 +135,7 @@ emiliebarnard.com
 		};
 		
 		function setHome(){
+			homeMarker = new google.maps.Marker();
 			
 			if ( $('#home').val().localeCompare("") != 0){
 				homeMarker.setMap(null);
@@ -206,7 +207,18 @@ emiliebarnard.com
 			}
 		};
 		
-		$(document).ready(function(){
+		function closeShareLinks(){
+			$('#dimmer').hide();
+			$('#shareBox').hide();
+		}
+		
+		$(document).ready(function(){		
+			/* $('#shareBox').hide(); */
+			
+			$('#mapLinkButton').click(function() {
+				$('#shareBox').css("display", "inline-block");
+				$('#dimmer').show();
+				});
 	
 		/* This allows the user to press enter rather than the start encryption button while in the rule number form box */
 		  $("input").keypress(function(event) {
@@ -220,14 +232,22 @@ emiliebarnard.com
     
   </head>
   <body>
+  <div id="dimmer"></div>
+  <div>
   	<h1><span style="color:#ff5700">reddit</span><span style="color:#336699">gifts</span> Map Maker</h1>
-  	<div id="wrapper">
   	<p>right click to remove any pin</p>
+  </div>
+  	  	<div id="shareBox"><p>Private link: 
+	  	  	<br>Share link:
+	  	  	<br><a href="javascript:closeShareLinks();">[x]</a>
+	  	  	</p>
+  	</div>
+
+  	<div id="wrapper">
   	<div id="userBox"><h2>Your info</h2>
   	<p>Post Code<span style="color:#ff5700">*</span>: <input type="text" id="home" size="10" value=""><br>
   	Username: <input type="text" id="homeUsername" size="10" value=""><br>
   	<input id="setHomeButton" type="button" onclick="setHome()" value="Set Home Location"></p></div>
-
   	<div id="gifteeBox"><h2>Giftee's info</h2>
   	<p>
   	Exchange<span style="color:#336699">*</span>: <select id="exchangeList">
@@ -245,7 +265,8 @@ emiliebarnard.com
   	<input id="undoPinButton" type="button" onclick="undoPin()" value="Undo Pin" disabled><p></div>
   	</div>
   	<div id="bottomWrapper"></div>
-  	<input id="mapLinkButton" type="button" onclick="window.open(mapURL)" value="Generate Image" disabled>
+  	<input id="mapLinkButton" type="button" value="Generate Links" disabled>
+
     <div id="map-canvas"></div>
     <div id="copyright">This site is not affiliated with nor endorsed by <a href="http://www.reddit.com">reddit</a> or <a href="http://www.redditgifts.com">redditgifts</a>.<br><br>Emilie Menard Barnard<br><a href="http://www.reddit.com/user/Fluffaykitties/">/u/fluffaykitties</a><br><a href="http://emiliebarnard.com">emiliebarnard.com</a></div>
   </body>

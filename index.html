@@ -189,18 +189,21 @@ emiliebarnard.com
   </head>
   <body>
   	<h1><span style="color:#ff5700">reddit</span><span style="color:#336699">gifts</span> Map Maker</h1>
+  	<div id="wrapper">
+  	<div id="userBox"><h2>Your info</h2>
+  	<p>Post Code<span style="color:#ff5700">*</span>: <input type="text" id="home" size="10" value="#########"><br>
+  	Username: <input type="text" id="homeUsername" size="10" value=""><br>
+  	<input id="setHomeButton" type="button" onclick="setHome()" value="Set Home Location"></p></div>
+
+  	<div id="gifteeBox"><h2>Giftee's info</h2>
   	<p>
-  	Home: <input type="text" id="home" size="10" value="#########"><br>
-  	Your username: <input type="text" id="homeUsername" size="10" value=""><br>
-  	<input id="setHomeButton" type="button" onclick="setHome()" value="Set Home Location">
-  	<br>
-  	<br>
-  	Post Code: <input type="text" id="postCode" size="10" value="#########"><br>
-  	Giftee username: <input type="text" id="gifteeUsername" size="10" value=""><br>
+  	Post Code<span style="color:#336699">*</span>: <input type="text" id="postCode" size="10" value="#########"><br>
+  	Username: <input type="text" id="gifteeUsername" size="10" value=""><br>
   	<input id="dropPinButton" type="button" onclick="dropPin()" value="Drop Pin!"> 
-  	<input id="undoPinButton" type="button" onclick="undoPin()" value="Undo Pin" disabled>
+  	<input id="undoPinButton" type="button" onclick="undoPin()" value="Undo Pin" disabled><p></div>
+  	</div>
+  	<div id="bottomWrapper"></div>
   	<input id="mapLinkButton" type="button" onclick="window.open(mapURL)" value="Generate Image" disabled>
-  	</p>
     <div id="map-canvas"></div>
     <div id="copyright">This site is not affiliated with nor endorsed by <a href="http://www.reddit.com">reddit</a> or <a href="http://www.redditgifts.com">redditgifts</a>.<br><br>Emilie Menard Barnard<br><a href="http://www.reddit.com/user/Fluffaykitties/">/u/fluffaykitties</a><br><a href="http://emiliebarnard.com">emiliebarnard.com</a></div>
   </body>

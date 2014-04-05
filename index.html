@@ -111,6 +111,20 @@ emiliebarnard.com
 					google.maps.event.addListener(pinMarker, 'click', function() {
 					    pinWindow.open(map,pinMarker);
 					  });
+					  
+					google.maps.event.addListener(pinMarker, 'rightclick', function() {
+					    pinMarker.setMap(null);
+					    pinMarker = null;
+					    
+					    var markerIndex = markersArray.indexOf(pinMarker);
+					    markersArray.splice(markerIndex, 1);
+					    
+					    if (markersArray[markersArray.length-1] == null){
+							document.getElementById("undoPinButton").disabled = true;
+							document.getElementById("mapLinkButton").disabled = true;
+
+						}
+					  });   
 				});
 			}
 /*
@@ -168,6 +182,11 @@ emiliebarnard.com
 					google.maps.event.addListener(homeMarker, 'click', function() {
 					    homeWindow.open(map,homeMarker);
 					  });
+					  
+					google.maps.event.addListener(homeMarker, 'rightclick', function() {
+					    homeMarker.setMap(null);
+					    homeMarker = null;
+					  });  
 					
 				});
 			}			
@@ -203,6 +222,7 @@ emiliebarnard.com
   <body>
   	<h1><span style="color:#ff5700">reddit</span><span style="color:#336699">gifts</span> Map Maker</h1>
   	<div id="wrapper">
+  	<p>right click to remove any pin</p>
   	<div id="userBox"><h2>Your info</h2>
   	<p>Post Code<span style="color:#ff5700">*</span>: <input type="text" id="home" size="10" value=""><br>
   	Username: <input type="text" id="homeUsername" size="10" value=""><br>

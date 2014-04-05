@@ -60,104 +60,117 @@ emiliebarnard.com
   		var mapURL = "http://maps.googleapis.com/maps/api/staticmap?size=480x480&markers=icon:http://chart.apis.google.com/chart?chst=d_map_pin_icon%26chld=cafe%257C996600%7C224+West+20th+Street+NY%7C75+9th+Ave+NY%7C700+E+9th+St+NY&sensor=true";
 		  
 		function dropPin(){
-			geocoder = new google.maps.Geocoder();
-			var post = $('#postCode').val();
-			var username = $('#gifteeUsername').val();
-			var lat;
-			var lng;
-			var pinDialog = '<div class="pinContent">';
-			
-			if (username.localeCompare("") != 0){
-				pinDialog += '<p>Giftee: <a href="http://reddit.com/u/' + username + '" target="_blank">/u/' + username + '</a><br>Meow =^.^=</p>'+'</div>';
-			}
-			else {
-				pinDialog += '<p>Meow =^.^=</p>' + '</div>'
-			}
-			
-			var pinWindow = new google.maps.InfoWindow({
-		      content: pinDialog,
-		      maxWidth: 97
-			  });
-			geocoder.geocode({address: post},
-			function(results_array, status) { 
-				lat = results_array[0].geometry.location.lat();
-				lng = results_array[0].geometry.location.lng();
-			
-				var pinPos = new google.maps.LatLng(lat, lng);
+		
+			if ( $('#exchangeList').val().localeCompare("") != 0 && $('#postCode').val().localeCompare("") != 0){	
 				
-				var pinImg = {
-				    url: 'http://www.fluffaykitties.com/jemimaup1.png',
-				    scaledSize: new google.maps.Size(iconSize, iconSize),
-				    origin: new google.maps.Point(0, 0),
-				    anchor: new google.maps.Point(iconSize/2, iconSize/2)
-				};
+				geocoder = new google.maps.Geocoder();
+				var post = $('#postCode').val();
+				var username = $('#gifteeUsername').val();
+				var exchange = $('#exchangeList').val();
+				var lat;
+				var lng;
+				var pinDialog = '<div class="pinContent">';
 				
-				var pinMarker = new google.maps.Marker({
-					position: pinPos,
-					map: map,
-					icon: pinImg,
-					title: "MEOW",
-					animation: google.maps.Animation.DROP
-				});
+				if (username.localeCompare("") != 0){
+					pinDialog += '<p><b>Exchange</b>: ' +  exchange + '<br><b>Giftee</b>: <a href="http://reddit.com/u/' + username + '" target="_blank">/u/' + username + '</a></p>'+'</div>';
+				}
+				else {
+					pinDialog += '<p><b>Exchange</b>: ' +  exchange + '</p>' + '</div>'
+				}
 				
-				markersArray.push(pinMarker);
-				document.getElementById("undoPinButton").disabled = false;
-				document.getElementById("mapLinkButton").disabled = false;
-				
-				google.maps.event.addListener(pinMarker, 'click', function() {
-				    pinWindow.open(map,pinMarker);
+				var pinWindow = new google.maps.InfoWindow({
+			      content: pinDialog,
+			      maxWidth: 125
 				  });
-			});			
+				geocoder.geocode({address: post},
+				function(results_array, status) { 
+					lat = results_array[0].geometry.location.lat();
+					lng = results_array[0].geometry.location.lng();
+				
+					var pinPos = new google.maps.LatLng(lat, lng);
+					
+					var pinImg = {
+					    url: 'http://www.fluffaykitties.com/jemimaup1.png',
+					    scaledSize: new google.maps.Size(iconSize, iconSize),
+					    origin: new google.maps.Point(0, 0),
+					    anchor: new google.maps.Point(iconSize/2, iconSize/2)
+					};
+					
+					var pinMarker = new google.maps.Marker({
+						position: pinPos,
+						map: map,
+						icon: pinImg,
+						title: "MEOW",
+						animation: google.maps.Animation.DROP
+					});
+					
+					markersArray.push(pinMarker);
+					document.getElementById("undoPinButton").disabled = false;
+					document.getElementById("mapLinkButton").disabled = false;
+					
+					google.maps.event.addListener(pinMarker, 'click', function() {
+					    pinWindow.open(map,pinMarker);
+					  });
+				});
+			}
+/*
+			else {
+				alert("No exchange!");
+			}
+*/			
 		};
 		
 		function setHome(){
-			homeMarker.setMap(null);
-			homeMarker = null;
-			geocoder = new google.maps.Geocoder();
-			var post = $('#home').val();
-			var user = $('#homeUsername').val();
-
-			var lat;
-			var lng;
-			var homeDialog = '<div class="homeContent">';
 			
-			if (user.localeCompare("") != 0){
-				homeDialog += '<p>Home of <a href="http://reddit.com/u/' + user + '" target="_blank">/u/' + user + '</a></p>' + '</div>';
-			}
-			else{
-				homeDialog += '<p>Home Sweet Home</p>' + '</div>';
-			}
-			var homeWindow = new google.maps.InfoWindow({
-			      content: homeDialog,
-			      maxWidth: 97
-			  });
-			geocoder.geocode({address: post},
-			function(results_array, status) { 
-				lat = results_array[0].geometry.location.lat();
-				lng = results_array[0].geometry.location.lng();
-			
-				var pinPos = new google.maps.LatLng(lat, lng);
+			if ( $('#home').val().localeCompare("") != 0){
+				homeMarker.setMap(null);
+				homeMarker = null;
+				geocoder = new google.maps.Geocoder();
+				var post = $('#home').val();
+				var user = $('#homeUsername').val();
+	
+				var lat;
+				var lng;
+				var homeDialog = '<div class="homeContent">';
 				
-				var pinImg = {
-				    url: 'home@2x.png',
-				    scaledSize: new google.maps.Size(homeIconDim, homeIconDim),
-				    origin: new google.maps.Point(0, 0),
-				    anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
-				};
-				
-				
-				homeMarker = new google.maps.Marker({
-					position: pinPos,
-					map: map,
-					icon: pinImg,
-					title: "Home Sweet Home",
-					animation: google.maps.Animation.DROP
-				});
-				google.maps.event.addListener(homeMarker, 'click', function() {
-				    homeWindow.open(map,homeMarker);
+				if (user.localeCompare("") != 0){
+					homeDialog += '<p>Home of <a href="http://reddit.com/u/' + user + '" target="_blank">/u/' + user + '</a></p>' + '</div>';
+				}
+				else{
+					homeDialog += '<p>Home Sweet Home</p>' + '</div>';
+				}
+				var homeWindow = new google.maps.InfoWindow({
+				      content: homeDialog,
+				      maxWidth: 100
 				  });
+				geocoder.geocode({address: post},
+				function(results_array, status) { 
+					lat = results_array[0].geometry.location.lat();
+					lng = results_array[0].geometry.location.lng();
 				
-			});			
+					var pinPos = new google.maps.LatLng(lat, lng);
+					
+					var pinImg = {
+					    url: 'home@2x.png',
+					    scaledSize: new google.maps.Size(homeIconDim, homeIconDim),
+					    origin: new google.maps.Point(0, 0),
+					    anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
+					};
+					
+					
+					homeMarker = new google.maps.Marker({
+						position: pinPos,
+						map: map,
+						icon: pinImg,
+						title: "Home Sweet Home",
+						animation: google.maps.Animation.DROP
+					});
+					google.maps.event.addListener(homeMarker, 'click', function() {
+					    homeWindow.open(map,homeMarker);
+					  });
+					
+				});
+			}			
 		};
 		
 		function undoPin(){
@@ -178,7 +191,7 @@ emiliebarnard.com
 	
 		/* This allows the user to press enter rather than the start encryption button while in the rule number form box */
 		  $("input").keypress(function(event) {
-		    if (event.which == 13 && $('#postCode').val().localeCompare("#########") != 0) {
+		    if (event.which == 13 && $('#postCode').val().localeCompare("") != 0) {
 		        $("#dropPinButton").click();
 		    }
 	  }); 
@@ -191,14 +204,23 @@ emiliebarnard.com
   	<h1><span style="color:#ff5700">reddit</span><span style="color:#336699">gifts</span> Map Maker</h1>
   	<div id="wrapper">
   	<div id="userBox"><h2>Your info</h2>
-  	<p>Post Code<span style="color:#ff5700">*</span>: <input type="text" id="home" size="10" value="#########"><br>
+  	<p>Post Code<span style="color:#ff5700">*</span>: <input type="text" id="home" size="10" value=""><br>
   	Username: <input type="text" id="homeUsername" size="10" value=""><br>
   	<input id="setHomeButton" type="button" onclick="setHome()" value="Set Home Location"></p></div>
 
   	<div id="gifteeBox"><h2>Giftee's info</h2>
   	<p>
-  	Post Code<span style="color:#336699">*</span>: <input type="text" id="postCode" size="10" value="#########"><br>
+  	Exchange<span style="color:#336699">*</span>: <select id="exchangeList">
+	  <option></option>
+	  <option>Lego</option>
+	  <option>Snacks</option>  
+	  <option>100</option>
+	  <option>Socks</option>
+	  <option>Puzzles</option>
+	</select><br>
+  	Post Code<span style="color:#336699">*</span>: <input type="text" id="postCode" size="10" value=""><br>
   	Username: <input type="text" id="gifteeUsername" size="10" value=""><br>
+
   	<input id="dropPinButton" type="button" onclick="dropPin()" value="Drop Pin!"> 
   	<input id="undoPinButton" type="button" onclick="undoPin()" value="Undo Pin" disabled><p></div>
   	</div>

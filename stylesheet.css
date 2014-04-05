@@ -95,7 +95,7 @@ h2 {
 }
 
 .homeContent {
-	width: 97px;
+	width: 100px;
 }
 
 .homeContent p {
@@ -108,13 +108,18 @@ h2 {
 	
 }
 
+.homeContent b {
+	color: #555555;
+	font-size: 10px;
+}
+
 .homeContent a:link, a:active, a:visited, a {
 	color: #000000;
 	text-decoration:none
 }
 
 .pinContent {
-	width: 97px;
+	width: 125px;
 }
 
 .pinContent p {
@@ -124,6 +129,12 @@ h2 {
     text-align: center;
     margin-left: auto ;
     margin-right: auto ;
+	
+}
+
+.pinContent b {
+	color: #555555;
+	font-size: 10px;
 	
 }
 

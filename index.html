@@ -64,6 +64,11 @@ emiliebarnard.com
 			var post = $('#postCode').val();
 			var lat;
 			var lng;
+			var pinDialog = '<div class="pinContent">'+'<p>Meow =^.^=</p>'+'</div>';
+			var pinWindow = new google.maps.InfoWindow({
+		      content: pinDialog,
+		      maxWidth: 97
+			  });
 			geocoder.geocode({address: post},
 			function(results_array, status) { 
 				lat = results_array[0].geometry.location.lat();
@@ -82,12 +87,17 @@ emiliebarnard.com
 					position: pinPos,
 					map: map,
 					icon: pinImg,
-					title: "MEOW"
+					title: "MEOW",
+					animation: google.maps.Animation.DROP
 				});
 				
 				markersArray.push(pinMarker);
 				document.getElementById("undoPinButton").disabled = false;
 				document.getElementById("mapLinkButton").disabled = false;
+				
+				google.maps.event.addListener(pinMarker, 'click', function() {
+				    pinWindow.open(map,pinMarker);
+				  });
 			});			
 		};
 		
@@ -98,6 +108,11 @@ emiliebarnard.com
 			var post = $('#home').val();
 			var lat;
 			var lng;
+			var homeDialog = '<div class="homeContent">'+'<p>Home Sweet Home</p>'+'</div>';
+			var homeWindow = new google.maps.InfoWindow({
+			      content: homeDialog,
+			      maxWidth: 97
+			  });
 			geocoder.geocode({address: post},
 			function(results_array, status) { 
 				lat = results_array[0].geometry.location.lat();
@@ -117,9 +132,13 @@ emiliebarnard.com
 					position: pinPos,
 					map: map,
 					icon: pinImg,
-					title: "Home Sweet Home"
+					title: "Home Sweet Home",
+					animation: google.maps.Animation.DROP
 				});
-
+				google.maps.event.addListener(homeMarker, 'click', function() {
+				    homeWindow.open(map,homeMarker);
+				  });
+				
 			});			
 		};
 		

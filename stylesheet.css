@@ -7,7 +7,6 @@ p {
 	font-size: 12px;
     font-family: verdana;
     text-align: center;
-    width: 500px;
     margin-left: auto ;
     margin-right: auto ;
 }
@@ -53,4 +52,32 @@ h2 {
 	width: 1025px;
 	height: 600px;
 	margin: auto;
+}
+
+.homeContent {
+	width: 97px;
+}
+
+.homeContent p {
+	color: #555555;
+	font-size: 10px;
+    font-family: verdana;
+    text-align: center;
+    margin-left: auto ;
+    margin-right: auto ;
+	
+}
+
+.pinContent {
+	width: 97px;
+}
+
+.pinContent p {
+	color: #555555;
+	font-size: 10px;
+    font-family: verdana;
+    text-align: center;
+    margin-left: auto ;
+    margin-right: auto ;
+	
 }

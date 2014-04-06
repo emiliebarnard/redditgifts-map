@@ -58,7 +58,7 @@ h2 {
 }
 
 #wrapper {
-	width: 450px;
+	width: 475px;
 	margin: 0 auto;
 	padding-top: 20px;
 }
@@ -140,13 +140,14 @@ h2 {
 
 #bottomWrapper {
 	clear: both;
-	padding-bottom: 20px;
+	/* padding-bottom: 20px; */
 }
 
 
 #copyright {
 	text-align: center;
 	margin-top: 20px;
+	margin-bottom: 10px;
 	color: #999999;
 	font-size: 10px;
     font-family: verdana;

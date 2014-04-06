@@ -237,7 +237,8 @@ emiliebarnard.com
   <div id="dimmer"></div>
   <div>
   	<h1><span style="color:#ff5700">reddit</span><span style="color:#336699">gifts</span> map</h1>
-  	<p>right click to remove any pin</p>
+  	<p>required fields denoted by an *
+  	</p>
   </div>
   	  	<div id="shareBox">
   	  		<a href="javascript:closeShareLinks();"><div id="closeButton"></div></a>
@@ -250,12 +251,13 @@ emiliebarnard.com
 
   	<div id="wrapper">
   	<div id="userBox"><h2>your info</h2>
-  	<p>Post Code<span style="color:#ff5700">*</span>: <input type="text" id="home" size="10" value=""><br>
-  	Username: <input type="text" id="homeUsername" size="10" value=""><br>
+  	<p>set home location for reference<br>
+  	<br>post code<span style="color:#ff5700">*</span>: <input type="text" id="home" size="10" value=""><br>
+  	username: <input type="text" id="homeUsername" size="10" value=""><br>
   	<input id="setHomeButton" type="button" onclick="setHome()" value="Set Home Location"></p></div>
   	<div id="gifteeBox"><h2>giftee's info</h2>
-  	<p>
-  	Exchange<span style="color:#336699">*</span>: <select id="exchangeList">
+  	<p>drop giftee pins for each exchange<br><br>
+  	exchange<span style="color:#336699">*</span>: <select id="exchangeList">
 	  <option></option>
 	  <option>Lego</option>
 	  <option>Snacks</option>  
@@ -263,14 +265,17 @@ emiliebarnard.com
 	  <option>Socks</option>
 	  <option>Puzzles</option>
 	</select><br>
-  	Post Code<span style="color:#336699">*</span>: <input type="text" id="postCode" size="10" value=""><br>
-  	Username: <input type="text" id="gifteeUsername" size="10" value=""><br>
+  	post code<span style="color:#336699">*</span>: <input type="text" id="postCode" size="10" value=""><br>
+  	username: <input type="text" id="gifteeUsername" size="10" value=""><br>
 
   	<input id="dropPinButton" type="button" onclick="dropPin()" value="Drop Pin!"> 
   	<input id="undoPinButton" type="button" onclick="undoPin()" value="Undo Pin" disabled><p></div>
   	</div>
   	<div id="bottomWrapper"></div>
-  	<input id="mapLinkButton" type="button" value="Generate Links" disabled>
+  	<div><p><br>click dropped pins for more info
+  	<br>right click to remove any pin  	
+  	</p>
+  	<input id="mapLinkButton" type="button" value="Generate Links" disabled></div>
 
     <div id="map-canvas"></div>
     <div id="copyright">This site is not affiliated with nor endorsed by <a href="http://www.reddit.com">reddit</a> or <a href="http://www.redditgifts.com">redditgifts</a>.<br><br>Emilie Menard Barnard<br><a href="http://www.reddit.com/user/Fluffaykitties/">/u/fluffaykitties</a><br><a href="http://emiliebarnard.com">emiliebarnard.com</a></div>

@@ -8,7 +8,7 @@ emiliebarnard.com
 <html>
   <head>
   <link rel="icon" type="image/png" href="gift@2x.png"/>
-  <title>redditgifts Map Maker</title>
+  <title>redditgifts map</title>
   <link rel="stylesheet" type="text/css" href="stylesheet.css" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   
@@ -210,6 +210,7 @@ emiliebarnard.com
 		function closeShareLinks(){
 			$('#dimmer').hide();
 			$('#shareBox').hide();
+/* 			$('#closeShareBox').hide(); */
 		}
 		
 		$(document).ready(function(){		
@@ -217,6 +218,7 @@ emiliebarnard.com
 			
 			$('#mapLinkButton').click(function() {
 				$('#shareBox').css("display", "inline-block");
+/* 				$('#closeShareBox').css("display", "inline-block"); */
 				$('#dimmer').show();
 				});
 	
@@ -234,21 +236,24 @@ emiliebarnard.com
   <body>
   <div id="dimmer"></div>
   <div>
-  	<h1><span style="color:#ff5700">reddit</span><span style="color:#336699">gifts</span> Map Maker</h1>
+  	<h1><span style="color:#ff5700">reddit</span><span style="color:#336699">gifts</span> map</h1>
   	<p>right click to remove any pin</p>
   </div>
-  	  	<div id="shareBox"><p>Private link: 
+  	  	<div id="shareBox">
+  	  		<a href="javascript:closeShareLinks();"><div id="closeButton"></div></a>
+  	  		<!-- <div id="closeShareBox"><a href="javascript:closeShareLinks();"><img src="x.png" alt="close" height="10" width="10"/></a></div> -->
+  	  		<p>Private link: 
 	  	  	<br>Share link:
-	  	  	<br><a href="javascript:closeShareLinks();">[x]</a>
+	  	  	<!-- <br><br><a href="javascript:closeShareLinks();"><img src="x.png" alt="close" height="10" width="10"/></a> -->
 	  	  	</p>
   	</div>
 
   	<div id="wrapper">
-  	<div id="userBox"><h2>Your info</h2>
+  	<div id="userBox"><h2>your info</h2>
   	<p>Post Code<span style="color:#ff5700">*</span>: <input type="text" id="home" size="10" value=""><br>
   	Username: <input type="text" id="homeUsername" size="10" value=""><br>
   	<input id="setHomeButton" type="button" onclick="setHome()" value="Set Home Location"></p></div>
-  	<div id="gifteeBox"><h2>Giftee's info</h2>
+  	<div id="gifteeBox"><h2>giftee's info</h2>
   	<p>
   	Exchange<span style="color:#336699">*</span>: <select id="exchangeList">
 	  <option></option>

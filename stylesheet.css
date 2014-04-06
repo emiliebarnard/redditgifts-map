@@ -94,10 +94,6 @@ h2 {
 #shareBox{
 	display: none;
 	width: 300px;
-/*
-	margin-left:auto;
-	margin-right:auto;
-*/
 	margin-top: 10px;
 	text-align: center;
 	border: 2px solid;
@@ -110,6 +106,36 @@ h2 {
 	top: 50%;
 	z-index: 1000;
 	background-color: white;
+	box-shadow: 5px 5px 100px #222222;
+}
+
+/*
+#closeShareBox {
+	width: 10px;
+	height: 10px;
+	margin-top: -7px;
+	float: right;
+	z-index: 1001;
+}
+*/
+
+#closeButton {
+	background-image: url('x@2x.png');
+	background-size: contain;
+	margin-top: -2px;
+	float: right;
+	height: 10px;
+	width: 10px;
+}
+
+#closeButton:hover {
+	background-image: url('xhover@2x.png');
+	background-size: contain;
+/*
+	float: right;
+	height: 10px;
+	width: 10px;
+*/
 }
 
 #bottomWrapper {

@@ -71,16 +71,25 @@ emiliebarnard.com
 				var lng;
 				var pinDialog = '<div class="pinContent">';
 				
+								
+				if ($('#rematchCheck').prop('checked')){
+					/* alert('checked'); */
+					pinDialog += '<p><b>exchange</b>: ' +  exchange + ' (rematch)'; 
+				}
+				
+				else{
+					pinDialog += '<p><b>exchange</b>: ' +  exchange
+				}
+				
 				if (username.localeCompare("") != 0){
-					pinDialog += '<p><b>Exchange</b>: ' +  exchange + '<br><b>Giftee</b>: <a href="http://reddit.com/u/' + username + '" target="_blank">/u/' + username + '</a></p>'+'</div>';
+					pinDialog += '<br><b>giftee</b>: <a href="http://reddit.com/u/' + username + '" target="_blank">/u/' + username + '</a>';
 				}
-				else {
-					pinDialog += '<p><b>Exchange</b>: ' +  exchange + '</p>' + '</div>'
-				}
+
+				pinDialog += '</p></div>';
 				
 				var pinWindow = new google.maps.InfoWindow({
 			      content: pinDialog,
-			      maxWidth: 125
+			      maxWidth: 200
 				  });
 				geocoder.geocode({address: post},
 				function(results_array, status) { 
@@ -149,10 +158,10 @@ emiliebarnard.com
 				var homeDialog = '<div class="homeContent">';
 				
 				if (user.localeCompare("") != 0){
-					homeDialog += '<p>Home of <a href="http://reddit.com/u/' + user + '" target="_blank">/u/' + user + '</a></p>' + '</div>';
+					homeDialog += '<p>home of <a href="http://reddit.com/u/' + user + '" target="_blank">/u/' + user + '</a></p>' + '</div>';
 				}
 				else{
-					homeDialog += '<p>Home Sweet Home</p>' + '</div>';
+					homeDialog += '<p>home sweet home</p>' + '</div>';
 				}
 				var homeWindow = new google.maps.InfoWindow({
 				      content: homeDialog,
@@ -267,6 +276,7 @@ emiliebarnard.com
 	</select><br>
   	post code<span style="color:#336699">*</span>: <input type="text" id="postCode" size="10" value=""><br>
   	username: <input type="text" id="gifteeUsername" size="10" value=""><br>
+  	rematch? <input type="checkbox" id="rematchCheck"><br>
 
   	<input id="dropPinButton" type="button" onclick="dropPin()" value="Drop Pin!"> 
   	<input id="undoPinButton" type="button" onclick="undoPin()" value="Undo Pin" disabled><p></div>

@@ -59,6 +59,123 @@ emiliebarnard.com
 		  
   		var mapURL = "http://maps.googleapis.com/maps/api/staticmap?size=480x480&markers=icon:http://chart.apis.google.com/chart?chst=d_map_pin_icon%26chld=cafe%257C996600%7C224+West+20th+Street+NY%7C75+9th+Ave+NY%7C700+E+9th+St+NY&sensor=true";
 		  
+			  var exchangeNumber = {
+					/* use the python script to generate the below part of the exchange nname to number lookup table: */
+					"Secret Santa 2009": 0,
+					"Arbitrary Day 2010": 1,
+					"Secret Santa 2010": 2,
+					"r/books 2011": 3,
+					"r/craftexchange 2011": 4,
+					"r/snackexchange 2011": 5,
+					"Arbitrary Day 2011": 6,
+					"reddit Trick or Treat 2011": 7,
+					"Coffee Mugs and Tea Cups 2011": 8,
+					"Secret Santa 2011": 9,
+					"T-Shirts 2012": 10,
+					"r/books 2012": 11,
+					"yarn exchange 2012": 12,
+					"Cookbooks": 13,
+					"My Little Pony": 14,
+					"Board Games": 15,
+					"Awesomesocks": 16,
+					"redditgifts for the troops": 17,
+					"Arbitrary Day 2012": 18,
+					"Arbitrary Day PLUS": 19,
+					"Presents for Pets": 20,
+					"Vinyl Exchange": 21,
+					"Decorate Your Dorm": 22,
+					"Comic Books and Graphic Novels": 23,
+					"reddit Gifts for the Teachers": 24,
+					"Doctor Who": 25,
+					"Postcards": 26,
+					"Ties": 27,
+					"Makeup and Nail Polish": 28,
+					"Decorate my Cubicle": 29,
+					"reddit Trick or Treat PLUS": 30,
+					"reddit Trick or Treat 2012": 31,
+					"Secret Santa 2012": 32,
+					"Holiday Greeting Card Exchange": 33,
+					"Pokemon Exchange": 34,
+					"Snack Exchange 2013": 35,
+					"Hats and Scarves Exchange": 36,
+					"Coffee and Tea Exchange": 37,
+					"Socks Exchange": 38,
+					"Book Exchange 2013": 39,
+					"Yarn Exchange 2013": 40,
+					"Fantasy Exchange": 41,
+					"Adventure Time Exchange": 42,
+					"T-shirt Exchange": 43,
+					"Manga Exchange": 44,
+					"Horror Exchange": 45,
+					"Awesome Smell Exchange": 46,
+					"Simple Pleasures Exchange": 47,
+					"Art Prints Exchange": 48,
+					"Plushy Exchange": 49,
+					"Condiments Exchange": 50,
+					"Star Wars Exchange": 51,
+					"Ameristralia Exchange": 52,
+					"Phone Cases Exchange": 53,
+					"Doctor Who (Almost) 50th Anniversary Exchange": 54,
+					"Pens and Stationery Exchange": 55,
+					"Disney Exchange": 56,
+					"Star Trek Exchange": 57,
+					"Nostalgia Exchange": 58,
+					"Arbitrary Day PLUS 2013": 59,
+					"Arbitrary Day 2013": 60,
+					"Nintendo Exchange": 61,
+					"Pints and Shot Glasses Exchange": 62,
+					"Magnets Exchange": 63,
+					"Game of Thrones Exchange": 64,
+					"Hometown Exchange": 65,
+					"Arrested Development Exchange": 66,
+					"Now Sharing Absurdity - The NSA Gift Exchange": 67,
+					"The World's End Exchange PLUS": 68,
+					"The World's End Exchange": 69,
+					"redditgifts for the Teachers 2013": 70,
+					"Zombies": 71,
+					"Trading Card Games": 72,
+					"Kitchen Goods": 73,
+					"Breaking Bad": 74,
+					"Board Games 2013": 75,
+					"Avatar: The Last Airbender": 76,
+					"NFL": 77,
+					"Blind Boxes and Bags": 78,
+					"Whedon-Verse": 79,
+					"Presents for Pets 2013": 80,
+					"reddit Trick or Treat 2013 PLUS": 81,
+					"reddit Trick or Treat 2013": 82,
+					"Secret Santa 2013": 83,
+					"Holiday Cards 2013": 84,
+					"Dinosaurs": 85,
+					"Studio Ghibli": 86,
+					"Awesome Aprons": 87,
+					"Lunchboxes": 88,
+					"Harry Potter": 89,
+					"DC Comics": 90,
+					"100th Exchange Extravaganza!": 91,
+					"Snacks 2014": 92,
+					"Socks 2014": 93,
+					"Yarn 2014": 94,
+					"Stickers": 95,
+					"LEGO": 96,
+					"Jim Henson": 97,
+					"Ghostbusters": 98,
+					"Books 2014": 99,
+					"Archer": 100,
+					"Ties 2014": 101,
+					"T-shirt 2014": 102,
+					"Soccer": 103,
+					"Tabletop RPGs": 104,
+					"Puzzles": 105,
+					"Ugly Mugs": 106,
+					"Marvel Universe": 107,
+					"Makeup & Nail Polish 2014": 108,
+					"Hockey": 109,
+					"Tim Burton": 110
+				/* use the python script to generate the above part of the exchange nname to number lookup table: */	  
+			  }; 
+
+		
 		function dropPin(){
 		
 			if ( $('#exchangeList').val().localeCompare("") != 0 && $('#postCode').val().localeCompare("") != 0){	
@@ -71,6 +188,7 @@ emiliebarnard.com
 				var lng;
 				var pinDialog = '<div class="pinContent">';
 				
+				alert( exchangeNumber[exchange]);
 								
 				if ($('#rematchCheck').prop('checked')){
 					/* alert('checked'); */
@@ -236,7 +354,8 @@ emiliebarnard.com
 		    if (event.which == 13 && $('#postCode').val().localeCompare("") != 0) {
 		        $("#dropPinButton").click();
 		    }
-	  }); 
+	  });
+	  
     
 });	 
 	    </script>

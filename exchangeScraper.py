@@ -5,6 +5,9 @@ emilie barnard
 
 beautiful soup: http://www.crummy.com/software/BeautifulSoup/
 """
+##############################################################################
+#### comment and uncomment code printed as needed
+##############################################################################
 
 import urllib2
 from bs4 import BeautifulSoup
@@ -36,12 +39,30 @@ for linkElement in allExchangeLinks:
 	elementExchangeName = str(linkElement.getText())
 	exchangeNames.append(elementExchangeName)
 
+
+##############################################################################
 ##############################################################################
 #####this will print the code needed to make the drop-down exchanges box in js
 
 ##for the dropbox, we'll display the most recent first, so we reverse the list again
-exchangeNamesByRecent = exchangeNames[::-1]
+# exchangeNamesByRecent = exchangeNames[::-1]
+# 
+# for name in exchangeNamesByRecent:
+# 	print "<option>" + name + "</option>"
+	
+##############################################################################
+##############################################################################
+#####this will print the code needed to numerical exchange lookup table in js
 
-for name in exchangeNamesByRecent:
-	print "<option>" + name + "</option>"
+name = ""
+# print exchangeNames 
+for index, name in enumerate(exchangeNames[:-1]): #loops through all but last element in list
+# 	print '"' + name+ '": function(){'
+# 	print '\treturn '+ str(index) + ';'
+# 	print'},'
+# print '"' + exchangeNames[-1] + '": function(){'
+# print '\treturn' + str(index+1) + ';'
+# print'}'
+	print '"' + name+ '": ' + str(index) + ','
+print '"' + exchangeNames[-1] + '": ' + str(index+1)
 

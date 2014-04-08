@@ -57,9 +57,11 @@ emiliebarnard.com
 		   		i++;
 	   		}	   		
 	   		
-			var headerTag = document.getElementById("header");
-			var currentHeader = headerTag.innerHTML;
-			headerTag.innerHTML = userName + currentHeader;
+	   		if (userName.localeCompare("") != 0){
+				var headerTag = document.getElementById("header");
+				var currentHeader = headerTag.innerHTML;
+				headerTag.innerHTML = currentHeader + " for " + userName;
+			}
 		}
  
 	    </script>  

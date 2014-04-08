@@ -93,7 +93,7 @@ h2 {
 
 #shareBox{
 	display: none;
-	width: 500px;
+	width: 300px;
 	margin-top: 10px;
 	text-align: center;
 	border: 2px solid;
@@ -102,7 +102,7 @@ h2 {
 	border-color: #cee3f8;
 	position: absolute;
 	left: 50%;
-	margin-left: -250px;
+	margin-left: -150px;
 	top: 50%;
 	z-index: 1000;
 	background-color: white;

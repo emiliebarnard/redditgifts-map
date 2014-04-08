@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<!--
+redditgifts map maker, an open source project hosted by emilie barnard
+emiliebarnard.com
+-->
+
+<html>
+  <head>
+  <link rel="icon" type="image/png" href="gift@2x.png"/>
+  <title>redditgifts map</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	    <script type="text/javascript"
+	      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBauEtRQ17iTKbRU3wC4QdFJ9ZzgJeHFF8&sensor=true">
+	    </script>
+	    
+	    <script type="text/javascript"
+	    	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+	    </script>
+	    
+	    <script type="text/javascript" src="/redditgiftsmapmaker/retina.js"></script>
+	    
+	    <script type="text/javascript">
+	    
+	    var iconSizeX = 37; /* ratio should be close to 29/40 */
+	    var iconSizeY = 51;
+	    var homeIconDim = 28;
+	    var map;
+	    var loadedURL;
+	    
+	      function initialize() {
+	       
+	        var mapOptions = {
+	          center: new google.maps.LatLng(39.828175, -98.579500),
+	          zoom: 4, 
+	          minZoom: 2,
+	          maxZoom: 7,
+	          streetViewControl: false
+	        };
+	       
+	        map = new google.maps.Map(document.getElementById("map-canvas"),
+	            mapOptions);
+	            
+          loadedURL = window.location.href;
+          setHeader();
+	            
+	   		}
+	   		google.maps.event.addDomListener(window, 'load', initialize);
+	   		
+	   	function setHeader(){
+	   		var userNameInURL = loadedURL.replace("http://embarnard.com/redditgiftsmapmaker/share/?","");
+	   		var userName = "";
+	   		var i = 0;
+	   		while (userNameInURL.charAt(i).localeCompare("&") != 0){
+		   		userName += userNameInURL.charAt(i);
+		   		i++;
+	   		}	   		
+	   		
+			var headerTag = document.getElementById("header");
+			var currentHeader = headerTag.innerHTML;
+			headerTag.innerHTML = userName + currentHeader;
+		}
+ 
+	    </script>  
+  </head>
+  
+  
+  
+  <body>
+  	<h1 id="header"><span style="color:#ff5700">reddit</span><span style="color:#336699">gifts</span> map</h1>
+  	<div id="map-canvas"></div>
+    <div id="copyright">This site is not affiliated with nor endorsed by <a href="http://www.reddit.com">reddit</a> or <a href="http://www.redditgifts.com">redditgifts</a>.<br><br>Emilie Menard Barnard<br><a href="http://www.reddit.com/user/Fluffaykitties/">/u/fluffaykitties</a><br><a href="http://emiliebarnard.com">emiliebarnard.com</a></div>
+  </body>
+</html>

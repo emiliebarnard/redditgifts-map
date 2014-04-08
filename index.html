@@ -35,6 +35,8 @@ emiliebarnard.com
 	    var iconSizeY = 51;
 	    var homeIconDim = 28;
 	    var map;
+	    var shareLinkURL = "http://embarnard.com/redditgiftsmapmaker/share/?";
+	    var encodedPinInfo = "&";
 	    
 	      function initialize() {
 	       
@@ -57,8 +59,6 @@ emiliebarnard.com
 		  var geocoder;
 		  var markersArray = new Array();
 		  var homeMarker = new google.maps.Marker();
-		  
-  		var mapURL = "http://maps.googleapis.com/maps/api/staticmap?size=480x480&markers=icon:http://chart.apis.google.com/chart?chst=d_map_pin_icon%26chld=cafe%257C996600%7C224+West+20th+Street+NY%7C75+9th+Ave+NY%7C700+E+9th+St+NY&sensor=true";
 		  
 			  var exchangeNumber = {
 					/* use the python script (part two) to generate the below part of the exchange name to number lookup table: */
@@ -290,7 +290,7 @@ emiliebarnard.com
 					"109": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/3/19/hockey-1395242271.png",
 					"110": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/3/19/burton-1395241890.png"
 					/* use the python script (part three) to generate the above part of the exchange number to image url lookup table: */
-					}
+					};
 		
 		function dropPin(){
 		
@@ -395,9 +395,11 @@ emiliebarnard.com
 				
 				if (user.localeCompare("") != 0){
 					homeDialog += '<p>home of <a href="http://reddit.com/u/' + user + '" target="_blank">/u/' + user + '</a></p>' + '</div>';
+					shareLinkURL += user;
 				}
 				else{
 					homeDialog += '<p>home sweet home</p>' + '</div>';
+					shareLinkURL = "http://embarnard.com/redditgiftsmapmaker/share/?";
 				}
 				var homeWindow = new google.maps.InfoWindow({
 				      content: homeDialog,
@@ -432,6 +434,7 @@ emiliebarnard.com
 					google.maps.event.addListener(homeMarker, 'rightclick', function() {
 					    homeMarker.setMap(null);
 					    homeMarker = null;
+					    shareLinkURL = "http://embarnard.com/redditgiftsmapmaker/share/?";
 					  });  
 					
 				});
@@ -458,10 +461,17 @@ emiliebarnard.com
 /* 			$('#closeShareBox').hide(); */
 		}
 		
+		function setLinks(){
+			var printedShareLink = document.getElementById("shareLink");
+			printedShareLink.innerHTML = shareLinkURL + encodedPinInfo;
+			printedShareLink.setAttribute('href', shareLinkURL + encodedPinInfo);
+		}
+		
 		$(document).ready(function(){		
 			/* $('#shareBox').hide(); */
 			
 			$('#mapLinkButton').click(function() {
+				setLinks();
 				$('#shareBox').css("display", "inline-block");
 /* 				$('#closeShareBox').css("display", "inline-block"); */
 				$('#dimmer').show();
@@ -475,7 +485,7 @@ emiliebarnard.com
 	  });
 	  
     
-});	 
+}); 
 	    </script>
     
   </head>
@@ -490,7 +500,7 @@ emiliebarnard.com
   	  		<a href="javascript:closeShareLinks();"><div id="closeButton"></div></a>
   	  		<!-- <div id="closeShareBox"><a href="javascript:closeShareLinks();"><img src="x.png" alt="close" height="10" width="10"/></a></div> -->
   	  		<p>Private link: 
-	  	  	<br>Share link:
+	  	  	<br>Share link: <a href="" id="shareLink" target=_blank></a> <!-- change this to actual link later -->
 	  	  	<!-- <br><br><a href="javascript:closeShareLinks();"><img src="x.png" alt="close" height="10" width="10"/></a> -->
 	  	  	</p>
   	</div>
@@ -498,12 +508,12 @@ emiliebarnard.com
   	<div id="wrapper">
   	<div id="userBox"><h2>your info</h2>
   	<p>set home location for reference<br>
-  	<br>post code<span style="color:#ff5700">*</span> <input type="text" id="home" size="10" value="" required><br>
+  	<br>post code<span style="color:#ff5700">*</span> <input type="text" id="home" size="10" value=""><br>
   	username <input type="text" id="homeUsername" size="10" value=""><br>
   	<input id="setHomeButton" type="button" onclick="setHome()" value="Set Home Location"></p></div>
   	<div id="gifteeBox"><h2>giftee's info</h2>
   	<p>drop giftee pins for each exchange<br><br>
-  	exchange<span style="color:#336699">*</span> <select id="exchangeList" required> 
+  	exchange<span style="color:#336699">*</span> <select id="exchangeList"> 
 	  <option></option>
 	  <!-- use the python script (part one) to generate the below part of the drop-down: -->
 		<option>Tim Burton</option>
@@ -619,7 +629,7 @@ emiliebarnard.com
 		<option>Secret Santa 2009</option>
 		<!-- use the python script (part one) to generate the above part of the drop-down: -->
 	</select><br>
-  	post code<span style="color:#336699">* </span><input type="text" id="postCode" size="10" value="" required><br>
+  	post code<span style="color:#336699">* </span><input type="text" id="postCode" size="10" value=""><br>
   	username <input type="text" id="gifteeUsername" size="10" value=""><br>
   	rematch? <input type="checkbox" id="rematchCheck"><br>
 

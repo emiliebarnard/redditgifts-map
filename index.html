@@ -261,12 +261,12 @@ emiliebarnard.com
   	<div id="wrapper">
   	<div id="userBox"><h2>your info</h2>
   	<p>set home location for reference<br>
-  	<br>post code<span style="color:#ff5700">*</span>: <input type="text" id="home" size="10" value=""><br>
-  	username: <input type="text" id="homeUsername" size="10" value=""><br>
+  	<br>post code<span style="color:#ff5700">*</span> <input type="text" id="home" size="10" value="" required><br>
+  	username <input type="text" id="homeUsername" size="10" value=""><br>
   	<input id="setHomeButton" type="button" onclick="setHome()" value="Set Home Location"></p></div>
   	<div id="gifteeBox"><h2>giftee's info</h2>
   	<p>drop giftee pins for each exchange<br><br>
-  	exchange<span style="color:#336699">*</span>: <select id="exchangeList">
+  	exchange<span style="color:#336699">*</span> <select id="exchangeList" required>
 	  <option></option>
 	  <option>Lego</option>
 	  <option>Snacks</option>  
@@ -274,8 +274,8 @@ emiliebarnard.com
 	  <option>Socks</option>
 	  <option>Puzzles</option>
 	</select><br>
-  	post code<span style="color:#336699">*</span>: <input type="text" id="postCode" size="10" value=""><br>
-  	username: <input type="text" id="gifteeUsername" size="10" value=""><br>
+  	post code<span style="color:#336699">* </span><input type="text" id="postCode" size="10" value="" required><br>
+  	username <input type="text" id="gifteeUsername" size="10" value=""><br>
   	rematch? <input type="checkbox" id="rematchCheck"><br>
 
   	<input id="dropPinButton" type="button" onclick="dropPin()" value="Drop Pin!"> 

@@ -143,7 +143,6 @@ h2 {
 	/* padding-bottom: 20px; */
 }
 
-
 #copyright {
 	text-align: center;
 	margin-top: 20px;
@@ -186,8 +185,13 @@ h2 {
 }
 
 .pinContent {
-	width: 200px;
+	width: 150px;
 }
+
+select,option {
+	text-align: center;
+	text-transform: lowercase;
+	}
 
 .pinContent p {
 	color: #555555;
@@ -196,6 +200,7 @@ h2 {
     text-align: center;
     margin-left: auto ;
     margin-right: auto ;
+    text-transform:lowercase;
 	
 }
 

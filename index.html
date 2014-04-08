@@ -31,7 +31,8 @@ emiliebarnard.com
 	    
 	    <script type="text/javascript">
 	    
-	    var iconSize = 50;
+	    var iconSizeX = 37; /* ratio should be close to 29/40 */
+	    var iconSizeY = 51;
 	    var homeIconDim = 28;
 	    var map;
 	    
@@ -60,7 +61,7 @@ emiliebarnard.com
   		var mapURL = "http://maps.googleapis.com/maps/api/staticmap?size=480x480&markers=icon:http://chart.apis.google.com/chart?chst=d_map_pin_icon%26chld=cafe%257C996600%7C224+West+20th+Street+NY%7C75+9th+Ave+NY%7C700+E+9th+St+NY&sensor=true";
 		  
 			  var exchangeNumber = {
-					/* use the python script to generate the below part of the exchange nname to number lookup table: */
+					/* use the python script (part two) to generate the below part of the exchange name to number lookup table: */
 					"Secret Santa 2009": 0,
 					"Arbitrary Day 2010": 1,
 					"Secret Santa 2010": 2,
@@ -172,9 +173,124 @@ emiliebarnard.com
 					"Makeup & Nail Polish 2014": 108,
 					"Hockey": 109,
 					"Tim Burton": 110
-				/* use the python script to generate the above part of the exchange nname to number lookup table: */	  
+				/* use the python script (part two) to generate the above part of the exchange name to number lookup table: */	  
 			  }; 
-
+			  
+			  var exchangeImageURL = {
+					/* use the python script (part three) to generate the below part of the exchange number to image url lookup table: */
+					"0": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/secret-santa-2009-logo/ss09.png",
+					"1": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/arbitrary-day-2010-logo/ad10.png",
+					"2": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/secret-santa-2010-logo/ss10.png",
+					"3": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/rbooks-1-logo/rbooks_logo_1.png",
+					"4": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/rcraftexchange-1-logo/rcraftexchange.png",
+					"5": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/rsnackexchange-1-logo/rsnackexchange.png",
+					"6": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/ad112.png",
+					"7": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/halloween-logo/halloween.png",
+					"8": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/coffee-mugs-and-tea-cups-logo/mugs.png",
+					"9": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/secret-santa-2011/ss_2012.gif",
+					"10": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/2/8/t-shirts-1328741603.gif",
+					"11": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/rbooks-1-logo/rbooks_logo_1.png",
+					"12": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/2/8/yarn-1328741654.gif",
+					"13": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/3/23/cookbooks-1332525041.png",
+					"14": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/3/23/my-little-pony-1332524825.png",
+					"15": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/3/23/boardgames-1332524567.png",
+					"16": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/3/23/socks-1332524236.png",
+					"17": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/5/20/reddit-gifts-troops-1337581720.gif",
+					"18": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/5/28/arbitrary-day-2012-1338262732.gif",
+					"19": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/5/28/arbitrary-day-plus-1338262762.gif",
+					"20": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/7/27/pets-1343427049.png",
+					"21": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/7/27/vinyl-1343426989.png",
+					"22": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/7/27/dorm-1343427073.png",
+					"23": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/7/27/comics-1343427092.png",
+					"24": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/7/27/teachers-1343427017.png",
+					"25": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/9/6/dr-who-1346968838.png",
+					"26": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/9/6/postcards-1346968317.png",
+					"27": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/9/6/ties-1346967805.png",
+					"28": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/9/7/makeup-1347032272.png",
+					"29": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/9/6/decorate-my-cubicle-1346965985.png",
+					"30": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/halloween-logo/halloween.png",
+					"31": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/halloween-logo/halloween.png",
+					"32": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/11/2/secret-santa-2012-1351877009.gif",
+					"33": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/12/3/holiday-greeting-cards-1354552546.png",
+					"34": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/1/25/pokemon-1359146410.png",
+					"35": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/rsnackexchange-1-logo/rsnackexchange.png",
+					"36": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/1/25/hats-and-scarves-1359146254.png",
+					"37": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/1/24/coffee-and-tea-1359055910.png",
+					"38": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/1/23/socks-new-1358981287.png",
+					"39": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/rbooks-1-logo/rbooks_logo_1.png",
+					"40": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/2/8/yarn-1328741654.gif",
+					"41": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/2/27/fantasy-1362003804.png",
+					"42": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/2/27/adventure-time-1362003660.png",
+					"43": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/2/27/tshirts-2013-1362003634.png",
+					"44": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/2/27/manga-1362003596.png",
+					"45": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/2/27/horror-1362003540.png",
+					"46": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/3/28/awesome-smell-1364496332.png",
+					"47": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/3/28/simple-pleasures-1364496316.png",
+					"48": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/3/28/art-prints-1364496295.png",
+					"49": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/3/28/plushy-1364496280.png",
+					"50": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/3/28/condiments-1364496260.png",
+					"51": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/3/28/star-wars-1364496238.png",
+					"52": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/4/29/ameristralia-1367253932.png",
+					"53": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/4/25/phone-cases-1366931869.png",
+					"54": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/9/6/dr-who-1346968838.png",
+					"55": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/4/25/pens-and-stationary-1366931821.png",
+					"56": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/4/25/disney-1366931887.png",
+					"57": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/4/25/star-trek-1366931852.png",
+					"58": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/4/25/nostalgia-1366931904.png",
+					"59": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/5/16/arbitrary-day-plus-2013-1368760054.png",
+					"60": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/5/16/arbitrary-day-2013-1368759955.png",
+					"61": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/6/20/nintendo-1371762339.png",
+					"62": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/4/25/pint-glasses-1366931924.png",
+					"63": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/6/21/magnets-1371839333.png",
+					"64": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/6/21/game-thrones-1371840210.png",
+					"65": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/6/21/hometown-1371838981.png",
+					"66": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/6/20/arrested-development-1371761674.png",
+					"67": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/6/28/freedom-isnt-free-1372482060.png",
+					"68": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/7/9/worlds-end-plus-1373400653.png",
+					"69": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/6/24/worlds-end-1372098494.png",
+					"70": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/8/16/teachers-2013-1376669257.png",
+					"71": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/8/16/zombies-1376666915.png",
+					"72": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/8/16/tcg-1376666823.png",
+					"73": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/8/16/kitchen-goods-1376666870.png",
+					"74": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/8/15/breaking-bad-1376634677.png",
+					"75": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/8/15/board-games-2013-1376635231.png",
+					"76": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/9/20/avatar-1379703050.png",
+					"77": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/9/20/nfl-1379699443.png",
+					"78": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/9/20/blind-boxes-and-bags-1379701023.png",
+					"79": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/9/20/joss-1379699182.png",
+					"80": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/9/20/presents-pets-2013-1379698807.png",
+					"81": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/9/20/trick-or-treat-2013-plus-1379698290.png",
+					"82": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/9/20/trick-or-treat-2013-1379698510.png",
+					"83": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/11/2/secret-santa-2013-1383433440.png",
+					"84": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/12/3/holiday-greeting-cards-1354552546.png",
+					"85": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/1/5/dinosaurs-1388956140.png",
+					"86": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/1/5/studio-ghibli-1388956046.png",
+					"87": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/1/5/awesome-aprons-1388955970.png",
+					"88": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/1/5/lunchboxes-1388955848.png",
+					"89": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/1/5/harry-potter-1388955746.png",
+					"90": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/1/5/dc-comics-1388955594.png",
+					"91": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/2/15/100-1392497983.png",
+					"92": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/rsnackexchange-1-logo/rsnackexchange.png",
+					"93": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2013/1/23/socks-new-1358981287.png",
+					"94": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/2/8/yarn-1328741654.gif",
+					"95": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/2/9/stickers-1391969617.png",
+					"96": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/2/9/lego-1391969361.png",
+					"97": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/2/10/jim-henson-1392086804.png",
+					"98": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/2/9/ghostbusters-1391969070.png",
+					"99": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/2/9/books-2014-1391968957.png",
+					"100": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/2/9/archer-1391968728.png",
+					"101": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/9/6/ties-1346967805.png",
+					"102": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/2/8/t-shirts-1328741603.gif",
+					"103": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/3/19/soccer-1395244517.png",
+					"104": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/3/19/rpg-1395244233.png",
+					"105": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/3/19/puzzles-1395243100.png",
+					"106": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/3/27/ugly-mugs-1395951198.png",
+					"107": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/3/19/marvel-1395242664.png",
+					"108": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2012/9/7/makeup-1347032272.png",
+					"109": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/3/19/hockey-1395242271.png",
+					"110": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/3/19/burton-1395241890.png"
+					/* use the python script (part three) to generate the above part of the exchange number to image url lookup table: */
+					}
 		
 		function dropPin(){
 		
@@ -188,7 +304,7 @@ emiliebarnard.com
 				var lng;
 				var pinDialog = '<div class="pinContent">';
 				
-				alert( exchangeNumber[exchange]);
+				/* alert( exchangeImageURL[exchangeNumber[exchange]]); */
 								
 				if ($('#rematchCheck').prop('checked')){
 					/* alert('checked'); */
@@ -207,7 +323,7 @@ emiliebarnard.com
 				
 				var pinWindow = new google.maps.InfoWindow({
 			      content: pinDialog,
-			      maxWidth: 200
+			      maxWidth: 150
 				  });
 				geocoder.geocode({address: post},
 				function(results_array, status) { 
@@ -217,10 +333,10 @@ emiliebarnard.com
 					var pinPos = new google.maps.LatLng(lat, lng);
 					
 					var pinImg = {
-					    url: 'http://www.fluffaykitties.com/jemimaup1.png',
-					    scaledSize: new google.maps.Size(iconSize, iconSize),
+					    url: exchangeImageURL[exchangeNumber[exchange]],
+					    scaledSize: new google.maps.Size(iconSizeX, iconSizeY),
 					    origin: new google.maps.Point(0, 0),
-					    anchor: new google.maps.Point(iconSize/2, iconSize/2)
+					    anchor: new google.maps.Point(iconSizeX/2, iconSizeY/2)
 					};
 					
 					var pinMarker = new google.maps.Marker({
@@ -262,11 +378,13 @@ emiliebarnard.com
 		};
 		
 		function setHome(){
-			homeMarker = new google.maps.Marker();
 			
 			if ( $('#home').val().localeCompare("") != 0){
-				homeMarker.setMap(null);
-				homeMarker = null;
+				
+				if (homeMarker != null){
+					homeMarker.setMap(null);
+					homeMarker = null;
+				}
 				geocoder = new google.maps.Geocoder();
 				var post = $('#home').val();
 				var user = $('#homeUsername').val();
@@ -387,7 +505,7 @@ emiliebarnard.com
   	<p>drop giftee pins for each exchange<br><br>
   	exchange<span style="color:#336699">*</span> <select id="exchangeList" required> 
 	  <option></option>
-	  <!-- use the python script to generate the below part of the drop-down: -->
+	  <!-- use the python script (part one) to generate the below part of the drop-down: -->
 		<option>Tim Burton</option>
 		<option>Hockey</option>
 		<option>Makeup & Nail Polish 2014</option>
@@ -499,7 +617,7 @@ emiliebarnard.com
 		<option>Secret Santa 2010</option>
 		<option>Arbitrary Day 2010</option>
 		<option>Secret Santa 2009</option>
-		<!-- use the python script to generate the above part of the drop-down: -->
+		<!-- use the python script (part one) to generate the above part of the drop-down: -->
 	</select><br>
   	post code<span style="color:#336699">* </span><input type="text" id="postCode" size="10" value="" required><br>
   	username <input type="text" id="gifteeUsername" size="10" value=""><br>

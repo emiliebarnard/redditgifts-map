@@ -47,22 +47,167 @@ emiliebarnard.com
 	            
 	   		}
 	   		google.maps.event.addDomListener(window, 'load', initialize);
+	   		var homeMarker = new google.maps.Marker();
 	   		
-	   	function setHeader(){
-	   		var userNameInURL = loadedURL.replace("http://embarnard.com/redditgiftsmapmaker/share/?","");
-	   		var userName = "";
+	   	function setHeader(){ //also sets home
+	   		var userInfoInURL = loadedURL.replace("http://embarnard.com/redditgiftsmapmaker/share/?","");
+	   		var userInfo = "";
 	   		var i = 0;
-	   		while (userNameInURL.charAt(i).localeCompare("&") != 0){
-		   		userName += userNameInURL.charAt(i);
-		   		i++;
-	   		}	   		
+	   		var commaCount = 0;
+	   		var lat = "";
+	   		var lng = "";
+	   		var userName = "";
 	   		
-	   		if (userName.localeCompare("") != 0){
-				var headerTag = document.getElementById("header");
-				var currentHeader = headerTag.innerHTML;
-				headerTag.innerHTML = currentHeader + " for " + userName;
-			}
-		}
+	   		while (userInfoInURL.charAt(i).localeCompare("&") != 0){
+		   		userInfo += userInfoInURL.charAt(i);
+		   		//comma check:
+		   		if (userInfoInURL.charAt(i).localeCompare(",") == 0){
+			   		commaCount ++;
+		   		}
+		   		i++;
+	   		}
+	   		
+	   		i=0; //reset
+	   			   		
+	   		//if comma count is zero, no user info given
+	   		
+	   		//if comma count is one, we have the location but not the username:
+	   		if (commaCount == 1){
+		   		while (userInfo.charAt(i).localeCompare(",") != 0){
+		   			lat += userInfo.charAt(i);
+		   			i++;
+		   		}
+		   		lat = parseFloat(lat, "10");
+		   		
+		   		i++; //get past the comma
+		   		
+		   		while (i < userInfo.length){
+			   		lng += userInfo.charAt(i);
+			   		i++;
+		   		}
+		   		
+		   		lng = parseFloat(lng, "10");
+		   		
+		   		
+		   		//drop home pin:
+		   		// geocoder = new google.maps.Geocoder();
+		   		
+		   		var homeDialog = '<div class="homeContent">' + '<p>home sweet home</p>' + '</div>';
+		   		
+		   		var homeWindow = new google.maps.InfoWindow({
+		   			  content: homeDialog,
+		   			  maxWidth: 100
+		   		  });
+		   		// geocoder.geocode({address: post},
+		   		// function(results_array, status) { 
+		   		// 	lat = results_array[0].geometry.location.lat();
+		   		// 	lng = results_array[0].geometry.location.lng();
+		   		
+		   			var pinPos = new google.maps.LatLng(lat, lng);
+		   			
+		   			var pinImg = {
+		   				url: 'home@2x.png',
+		   				scaledSize: new google.maps.Size(homeIconDim, homeIconDim),
+		   				origin: new google.maps.Point(0, 0),
+		   				anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
+		   			};
+		   			homeMarker = new google.maps.Marker({
+		   				position: pinPos,
+		   				map: map,
+		   				icon: pinImg,
+		   				title: "Home Sweet Home",
+		   				animation: google.maps.Animation.DROP
+		   			});
+		   			google.maps.event.addListener(homeMarker, 'click', function() {
+		   				homeWindow.open(map,homeMarker);
+		   			  });
+	   		
+		// });
+	}	   		
+	   		//if comma count is two, we have the location and the username:
+	   		if (commaCount == 2){
+		   		//get username:
+		   		while (userInfo.charAt(i).localeCompare(",") != 0){
+			   		userName += userInfo.charAt(i);
+			   		i++;
+			   	}
+			   	
+			   	//set header to have username in it:
+			   	var headerTag = document.getElementById("header");
+			   	var currentHeader = headerTag.innerHTML;
+			   	headerTag.innerHTML = currentHeader + " for " + userName;
+			   	
+			   	i++; //get past the comma
+			   	
+			   	//get position
+			   	while (userInfo.charAt(i).localeCompare(",") != 0){
+			   	   			lat += userInfo.charAt(i);
+			   	   			i++;
+				}
+				lat = parseFloat(lat, "10");
+				
+				
+				i++; //get past the comma
+				
+				while (i < userInfo.length){
+				   	lng += userInfo.charAt(i);
+				   	i++;
+				}
+				lng = parseFloat(lng, "10");
+				
+				
+				//drop home pin:
+				// geocoder = new google.maps.Geocoder();
+				
+				var homeDialog = '<div class="homeContent">' + '<p>home of <a href="http://reddit.com/u/' + userName + '" target="_blank">/u/' + userName + '</a></p>' + '</div>';
+				
+				var homeWindow = new google.maps.InfoWindow({
+					  content: homeDialog,
+					  maxWidth: 100
+				  });
+				var pinPos = new google.maps.LatLng(lat, lng);
+				  
+				  var pinImg = {
+				  	url: 'home@2x.png',
+				  	scaledSize: new google.maps.Size(homeIconDim, homeIconDim),
+				  	origin: new google.maps.Point(0, 0),
+				  	anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
+				  };
+				    
+				  
+				homeMarker = new google.maps.Marker({
+					position: pinPos,
+					map: map,
+					icon: pinImg,
+					title: "Home Sweet Home",
+					animation: google.maps.Animation.DROP
+				});
+				google.maps.event.addListener(homeMarker, 'click', function() {
+					homeWindow.open(map,homeMarker);
+				  });
+				// geocoder.geocode({address: post},
+				// function(results_array, status) { 
+				// 	lat = results_array[0].geometry.location.lat();
+				// 	lng = results_array[0].geometry.location.lng();
+				
+					var pinPos = new google.maps.LatLng(lat, lng);
+					
+					var pinImg = {
+						url: 'home@2x.png',
+						scaledSize: new google.maps.Size(homeIconDim, homeIconDim),
+						origin: new google.maps.Point(0, 0),
+						anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
+					};
+			   	
+	   		// });
+	   	}
+	   		
+			//  		if (userName.localeCompare("") != 0){
+			// 	var headerTag = document.getElementById("header");
+			// 	var currentHeader = headerTag.innerHTML;
+			// 	headerTag.innerHTML = currentHeader + " for " + userName;
+			// }
+}
  
 	    </script>  
   </head>

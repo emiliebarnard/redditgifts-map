@@ -36,7 +36,6 @@ emiliebarnard.com
 	    var homeIconDim = 28;
 	    var map;
 	    var shareLinkURL = "http://embarnard.com/redditgiftsmapmaker/share/?";
-	    var encodedPinInfo = "&";
 	    
 	      function initialize() {
 	       
@@ -380,6 +379,7 @@ emiliebarnard.com
 		function setHome(){
 			
 			if ( $('#home').val().localeCompare("") != 0){
+				shareLinkURL = "http://embarnard.com/redditgiftsmapmaker/share/?";
 				
 				if (homeMarker != null){
 					homeMarker.setMap(null);
@@ -395,7 +395,7 @@ emiliebarnard.com
 				
 				if (user.localeCompare("") != 0){
 					homeDialog += '<p>home of <a href="http://reddit.com/u/' + user + '" target="_blank">/u/' + user + '</a></p>' + '</div>';
-					shareLinkURL += user;
+					shareLinkURL += user +",";
 				}
 				else{
 					homeDialog += '<p>home sweet home</p>' + '</div>';
@@ -419,6 +419,7 @@ emiliebarnard.com
 					    anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
 					};
 					
+					shareLinkURL += lat.toFixed(4) + "," + lng.toFixed(4);
 					
 					homeMarker = new google.maps.Marker({
 						position: pinPos,
@@ -462,6 +463,15 @@ emiliebarnard.com
 		}
 		
 		function setLinks(){
+			var encodedPinInfo = "&";
+			
+			for (var i = 0; i < markersArray.length; i++){
+				encodedPinInfo += markersArray[i].getPosition().lat().toFixed(4).toString() + ",";
+				encodedPinInfo += markersArray[i].getPosition().lng().toFixed(4).toString();
+				encodedPinInfo += "&";
+			}
+			
+			
 			var printedShareLink = document.getElementById("shareLink");
 			printedShareLink.innerHTML = shareLinkURL + encodedPinInfo;
 			printedShareLink.setAttribute('href', shareLinkURL + encodedPinInfo);

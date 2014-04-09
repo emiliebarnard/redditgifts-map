@@ -109,15 +109,10 @@ h2 {
 	box-shadow: 5px 5px 100px #222222;
 }
 
-/*
-#closeShareBox {
-	width: 10px;
-	height: 10px;
-	margin-top: -7px;
-	float: right;
-	z-index: 1001;
+#shareBox p {
+	width: 500px;
+	word-break:break-all;
 }
-*/
 
 #closeButton {
 	background-image: url('x@2x.png');
@@ -131,11 +126,6 @@ h2 {
 #closeButton:hover {
 	background-image: url('xhover@2x.png');
 	background-size: contain;
-/*
-	float: right;
-	height: 10px;
-	width: 10px;
-*/
 }
 
 #bottomWrapper {
@@ -189,7 +179,6 @@ h2 {
 }
 
 select,option {
-	text-align: center;
 	text-transform: lowercase;
 	}
 

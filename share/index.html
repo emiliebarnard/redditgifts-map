@@ -43,12 +43,24 @@ emiliebarnard.com
 	            mapOptions);
 	            
           loadedURL = window.location.href;
+          var homeMarker = new google.maps.Marker();
           setHeader();
+          dropPins();
 	            
 	   		}
-	   		google.maps.event.addDomListener(window, 'load', initialize);
-	   		var homeMarker = new google.maps.Marker();
 	   		
+	   		google.maps.event.addDomListener(window, 'load', initialize);
+	   		
+	   		
+	   	function dropPins(){
+		   	//first we need to separate the pins
+		   	
+		   	
+		   	//then we drop them like we did in other file
+		   	
+	   	}
+	   	
+	   	
 	   	function setHeader(){ //also sets home
 	   		var userInfoInURL = loadedURL.replace("http://embarnard.com/redditgiftsmapmaker/share/?","");
 	   		var userInfo = "";
@@ -68,6 +80,7 @@ emiliebarnard.com
 	   		}
 	   		
 	   		i=0; //reset
+	   		loadedURL.replace(userInfo,""); //removes the user info from the loaded url, leaving just the info regarding giftee pins
 	   			   		
 	   		//if comma count is zero, no user info given
 	   		
@@ -198,16 +211,10 @@ emiliebarnard.com
 						origin: new google.maps.Point(0, 0),
 						anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
 					};
-			   	
-	   		// });
-	   	}
-	   		
-			//  		if (userName.localeCompare("") != 0){
-			// 	var headerTag = document.getElementById("header");
-			// 	var currentHeader = headerTag.innerHTML;
-			// 	headerTag.innerHTML = currentHeader + " for " + userName;
-			// }
-}
+
+	   		}
+
+		}
  
 	    </script>  
   </head>

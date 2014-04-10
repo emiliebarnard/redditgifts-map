@@ -284,7 +284,79 @@ emiliebarnard.com
 	   				"110": "https://d2npbuaakacvlz.cloudfront.net/images/uploaded/exchange-logo/2014/3/19/burton-1395241890.png"
 	   				/* use the python script (part three) to generate the above part of the exchange number to image url lookup table: */
 	   				};
-	   		
+	   	
+	   	
+	   	function dropPin(pinStuff){
+		   	
+		   	// var pinMarker = new google.maps.Marker();
+		   	  	// var pinWindow = new google.maps.InfoWindow();
+		   	  	var pinDialog = '<div class="pinContent">';
+		   	  
+		   	  	// first we split up the info
+		   	  	var arrayOfThisPin = pinStuff.split(",");
+		   	  	
+		   	  	//name of exchange
+		   	  	var exchange = decodeURIComponent(arrayOfThisPin[0]);
+		   	  	
+		   	  	//position of pin:
+		   	  	var lat = arrayOfThisPin[1];
+		   	  	var lng = arrayOfThisPin[2];
+		   	  	
+		   	  	var username = "";
+		   	  			   	  	
+		   		 	//now we have to check the optional parameters
+		   		
+		   		 	if (arrayOfThisPin.length == 5){	//case that all optional fields were filled out (username and it's a rematch case)
+		   			username = arrayOfThisPin[3];
+		   			pinDialog += '<p><b>exchange</b>: ' +  exchange + ' (rematch)';
+		   			pinDialog += '<br><b>giftee</b>: <a href="http://reddit.com/u/' + username + '" target="_blank">/u/' + username + '</a>';
+		   		}
+		   		
+		   		if (arrayOfThisPin.length == 4 ){ //case that one optional field was filled out (username or rematch)
+		   			if (arrayOfThisPin[3].localeCompare("") == 0){ //rematch case
+		   		 	pinDialog += '<p><b>exchange</b>: ' +  exchange + ' (rematch)';
+		   			}
+		   			else{ //username case
+		   		 	username = arrayOfThisPin[3];
+		   		 	pinDialog += '<p><b>exchange</b>: ' +  exchange;
+		   		 	pinDialog += '<br><b>giftee</b>: <a href="http://reddit.com/u/' + username + '" target="_blank">/u/' + username + '</a>';
+		   			}
+		   			
+		   		}
+		   		
+		   		if (arrayOfThisPin.length == 3){ //required fields only case
+		   			pinDialog += '<p><b>exchange</b>: ' +  exchange;
+		   		}
+		   		
+		   		pinDialog += '</p></div>';
+		   		
+		   		var pinWindow = new google.maps.InfoWindow({
+		   			  content: pinDialog,
+		   			  maxWidth: 150
+		   			  });
+		   		
+		   		
+		   		var pinPos = new google.maps.LatLng(lat, lng);
+		   		
+		   		var pinImg = {
+		   			url: exchangeImageURL[exchangeNumber[exchange]],
+		   			scaledSize: new google.maps.Size(iconSizeX, iconSizeY),
+		   			origin: new google.maps.Point(0, 0),
+		   			anchor: new google.maps.Point(iconSizeX/2, iconSizeY/2)
+		   		};
+		   		
+		   		var pinMarker = new google.maps.Marker({
+		   			position: pinPos,
+		   			map: map,
+		   			icon: pinImg,
+		   			title: exchange
+		   		});
+		   		
+		   		google.maps.event.addListener(pinMarker, 'click', function() {
+		   		  pinWindow.open(map,pinMarker);
+		   		});
+		   	
+	   	}
 	   		
 	   	function dropPins(){
 		   	//first we need to separate the pins
@@ -292,75 +364,11 @@ emiliebarnard.com
 		   	pinInfoInURL = pinInfoInURL.slice(0, -1); //remove last &
 		   	
 		   	var arrayOfPinInfo = pinInfoInURL.split("&");
+		   	
 
 		   	//then we drop them like we did in other file
 		   	for (var j = 0; j < arrayOfPinInfo.length; j++){
-			   	
-			   	var pinDialog = '<div class="pinContent">';
-			   	// first we split up the info
-			   	var arrayOfThisPin = arrayOfPinInfo[j].split(",");
-			   	
-			   	//name of exchange
-			   	var exchange = decodeURIComponent(arrayOfThisPin[0]);
-			   	
-			   	//position of pin:
-			   	var lat = arrayOfThisPin[1];
-			   	var lng = arrayOfThisPin[2];
-			   	
-			   	var username = "";
-			   	
-			 	//  	now we have to check the optional parameters
-			 	// 
-			 	//  	if (arrayOfThisPin.length == 5){	//case that all optional fields were filled out (username and it's a rematch case)
-			 	// 	username = arrayOfThisPin[3];
-			 	// 	pinDialog += '<p><b>exchange</b>: ' +  exchange + ' (rematch)';
-			 	// 	pinDialog += '<br><b>giftee</b>: <a href="http://reddit.com/u/' + username + '" target="_blank">/u/' + username + '</a>';
-			 	// }
-			 	// 
-			 	// if (arrayOfThisPin.length == 4 ){ //case that one optional field was filled out (username or rematch)
-			 	// 	if (arrayOfThisPin[3].localeCompare("") == 0){ //rematch case
-			 	//  	pinDialog += '<p><b>exchange</b>: ' +  exchange + ' (rematch)';
-			 	// 	}
-			 	// 	else{ //username case
-			 	//  	username = arrayOfThisPin[3];
-			 	//  	pinDialog += '<br><b>giftee</b>: <a href="http://reddit.com/u/' + username + '" target="_blank">/u/' + username + '</a>';
-			 	// 	}
-			 	// 	
-			 	// }
-			 	// 
-			 	// if (arrayOfThisPin.length == 3){ //required fields only case
-			 	// 	pinDialog += '<p><b>exchange</b>: ' +  exchange;
-			 	// }
-			 	
-			 	pinDialog += '</p></div>';
-			 	
-			 	var pinWindow = new google.maps.InfoWindow({
-			 		  content: pinDialog,
-			 		  maxWidth: 150
-			 		  });
-			 	
-			 	
-			 	var pinPos = new google.maps.LatLng(lat, lng);
-			 	
-			 	var pinImg = {
-			 		url: exchangeImageURL[exchangeNumber[exchange]],
-			 		scaledSize: new google.maps.Size(iconSizeX, iconSizeY),
-			 		origin: new google.maps.Point(0, 0),
-			 		anchor: new google.maps.Point(iconSizeX/2, iconSizeY/2)
-			 	};
-			 	
-			 	var pinMarker = new google.maps.Marker({
-			 		position: pinPos,
-			 		map: map,
-			 		icon: pinImg,
-			 		title: exchange,
-			 		animation: google.maps.Animation.DROP
-			 	});
-			 	
-			 	// google.maps.event.addListener(pinMarker, 'click', function() {
-			 	//   pinWindow.open(map,pinMarker);
-			 	// });
-			   	
+			   	dropPin(arrayOfPinInfo[j]);
 		   	}
 		   	
 	   	}
@@ -430,8 +438,7 @@ emiliebarnard.com
 		   				position: pinPos,
 		   				map: map,
 		   				icon: pinImg,
-		   				title: "Home Sweet Home",
-		   				animation: google.maps.Animation.DROP
+		   				title: "Home Sweet Home"
 		   			});
 		   			google.maps.event.addListener(homeMarker, 'click', function() {
 		   				homeWindow.open(map,homeMarker);
@@ -492,8 +499,7 @@ emiliebarnard.com
 					position: pinPos,
 					map: map,
 					icon: pinImg,
-					title: "Home Sweet Home",
-					animation: google.maps.Animation.DROP
+					title: "Home Sweet Home"
 				});
 				google.maps.event.addListener(homeMarker, 'click', function() {
 					homeWindow.open(map,homeMarker);
@@ -508,10 +514,10 @@ emiliebarnard.com
 						anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
 					};
 
-	}
-	   	}
-
+			}
 		}
+	}
+
  
 	    </script>  
   </head>

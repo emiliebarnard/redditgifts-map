@@ -36,7 +36,8 @@ emiliebarnard.com
 	    var homeIconDim = 28;
 	    var map;
 	    var shareLinkURL = "http://embarnard.com/redditgiftsmapmaker/share/?";
-	    
+	    //var bounds = new google.maps.LatLngBounds(new google.maps.LatLng(57.1, -137.9),new google.maps.LatLng(56.8, -53.2),new google.maps.LatLng(31, -90.7)); //set this so it fits to the default map loaded
+	    var bounds = new google.maps.LatLngBounds(new google.maps.LatLng(39.828175, -98.579500));
 	      function initialize() {
 	       
 	        var mapOptions = {
@@ -453,6 +454,8 @@ emiliebarnard.com
 				
 					var pinPos = new google.maps.LatLng(lat, lng);
 					
+
+					
 					var pinImg = {
 					    url: exchangeImageURL[exchangeNumber[exchange]],
 					    scaledSize: new google.maps.Size(iconSizeX, iconSizeY),
@@ -502,7 +505,16 @@ emiliebarnard.com
 							document.getElementById("mapLinkButton").disabled = true;
 
 						}
-					  });   
+					  });
+					  
+					  	map.setZoom(4);
+
+					  
+					  //fit map to include new pin
+					     bounds.extend(pinPos);
+					     map.fitBounds(bounds);   
+					  //reset zoom   
+
 				});
 			}
 			
@@ -543,6 +555,7 @@ emiliebarnard.com
 					lng = results_array[0].geometry.location.lng();
 				
 					var pinPos = new google.maps.LatLng(lat, lng);
+
 					
 					var pinImg = {
 					    url: 'home@2x.png',
@@ -563,6 +576,8 @@ emiliebarnard.com
 					
 
 					
+
+					
 					google.maps.event.addListener(homeMarker, 'click', function() {
 						//close current windows
 						for (var j = 0; j < pinWindows.length; j++){
@@ -577,7 +592,19 @@ emiliebarnard.com
 					    homeMarker.setMap(null);
 					    homeMarker = null;
 					    shareLinkURL = "http://embarnard.com/redditgiftsmapmaker/share/?";
-					  });  
+					  });
+					  
+					  	map.setZoom(4);
+
+					  
+					  //fit map to include new pin
+					    bounds.extend(pinPos);
+					    map.fitBounds(bounds);
+					    //reset zoom
+					    // var listener = google.maps.event.addListener(map, "idle", function () {
+					    //   	map.setZoom(3);
+					    //   	google.maps.event.removeListener(listener);
+					    //   });  
 					
 				});
 			}			

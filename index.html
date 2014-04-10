@@ -543,7 +543,7 @@ emiliebarnard.com
 					    anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
 					};
 					
-					shareLinkURL += lat.toFixed(4) + "," + lng.toFixed(4);
+					shareLinkURL += lat.toFixed(1) + "," + lng.toFixed(1);
 					
 					homeMarker = new google.maps.Marker({
 						position: pinPos,
@@ -594,8 +594,8 @@ emiliebarnard.com
 			for (var i = 0; i < markersArray.length; i++){
 				// encodedPinInfo += encodeURIComponent(markersArray[i].getTitle()) + ","; //for exchange name
 				encodedPinInfo += exchangeNumberLowerCase[markersArray[i].getTitle()] + ","
-				encodedPinInfo += markersArray[i].getPosition().lat().toFixed(4).toString() + ","; //for lat position
-				encodedPinInfo += markersArray[i].getPosition().lng().toFixed(4).toString(); //for lng position
+				encodedPinInfo += markersArray[i].getPosition().lat().toFixed(1).toString() + ","; //for lat position
+				encodedPinInfo += markersArray[i].getPosition().lng().toFixed(1).toString(); //for lng position
 				//check to see if giftee is empty string or not. if not, add comma and giftee name
 				if (gifteesArray[i].localeCompare("") != 0){
 					encodedPinInfo += "," + gifteesArray[i];

@@ -28,6 +28,7 @@ emiliebarnard.com
 	    var homeIconDim = 28;
 	    var map;
 	    var loadedURL;
+	    var pinWindows = new Array();
 	    
 	      function initialize() {
 	       
@@ -45,12 +46,14 @@ emiliebarnard.com
           loadedURL = window.location.href;
           var homeMarker = new google.maps.Marker();
           
+          
           setHeader();
           dropPins();
 	            
 	   		}
 	   		
 	   		google.maps.event.addDomListener(window, 'load', initialize);
+	   		
 	   		
 	   		
 	   		var exchangeNumber = {
@@ -468,9 +471,13 @@ emiliebarnard.com
 		   		});
 		   		
 		   		google.maps.event.addListener(pinMarker, 'click', function() {
-		   		  pinWindow.open(map,pinMarker);
+			   		//close current windows
+			   		for (var j = 0; j < pinWindows.length; j++){
+			   			pinWindows[j].close();
+			   		}
+		   		  pinWindow.open(map,this);
 		   		});
-		   	
+		   		pinWindows.push(pinWindow);
 	   	}
 	   		
 	   	function dropPins(){
@@ -556,8 +563,12 @@ emiliebarnard.com
 		   				title: "Home Sweet Home"
 		   			});
 		   			google.maps.event.addListener(homeMarker, 'click', function() {
-		   				homeWindow.open(map,homeMarker);
+			   			for (var j = 0; j < pinWindows.length; j++){
+			   				pinWindows[j].close();
+			   			}
+		   				homeWindow.open(map,this);
 		   			  });
+		   			  pinWindows.push(homeWindow);
 	   		
 	}	   		
 	   		//if comma count is two, we have the location and the username:
@@ -617,8 +628,13 @@ emiliebarnard.com
 					title: "Home Sweet Home"
 				});
 				google.maps.event.addListener(homeMarker, 'click', function() {
-					homeWindow.open(map,homeMarker);
+					//close current windows
+					for (var j = 0; j < pinWindows.length; j++){
+						pinWindows[j].close();
+					}
+					homeWindow.open(map,this);
 				  });
+				  pinWindows.push(homeWindow);
 				
 					var pinPos = new google.maps.LatLng(lat, lng);
 					

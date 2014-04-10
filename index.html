@@ -60,6 +60,7 @@ emiliebarnard.com
 		  var gifteesArray = new Array();
 		  var rematchesArray = new Array();
 		  var homeMarker = new google.maps.Marker();
+		  var pinWindows = new Array();
 		  
 			  var exchangeNumber = {
 					/* use the python script (part two) to generate the below part of the exchange name to number lookup table: */
@@ -474,9 +475,16 @@ emiliebarnard.com
 					document.getElementById("undoPinButton").disabled = false;
 					document.getElementById("mapLinkButton").disabled = false;
 					
+					
 					google.maps.event.addListener(pinMarker, 'click', function() {
-					    pinWindow.open(map,pinMarker);
+						//close current windows
+						for (var j = 0; j < pinWindows.length; j++){
+							pinWindows[j].close();
+						}
+					    pinWindow.open(map,this);
 					  });
+					  
+					pinWindows.push(pinWindow);
 					  
 					google.maps.event.addListener(pinMarker, 'rightclick', function() {
 					    var markerIndex = markersArray.indexOf(pinMarker);
@@ -552,9 +560,18 @@ emiliebarnard.com
 						title: "Home Sweet Home",
 						animation: google.maps.Animation.DROP
 					});
+					
+
+					
 					google.maps.event.addListener(homeMarker, 'click', function() {
-					    homeWindow.open(map,homeMarker);
+						//close current windows
+						for (var j = 0; j < pinWindows.length; j++){
+							pinWindows[j].close();
+						}
+					    homeWindow.open(map,this);
 					  });
+					  
+					  pinWindows.push(homeWindow);
 					  
 					google.maps.event.addListener(homeMarker, 'rightclick', function() {
 					    homeMarker.setMap(null);

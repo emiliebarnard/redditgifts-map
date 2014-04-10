@@ -62,17 +62,27 @@ for linkElement in allExchangeLinks:
 
 ####for share link table, add lowercase condition
 
+# name = ""
+# # print exchangeNames 
+# for index, name in enumerate(exchangeNames[:-1]): #loops through all but last element in list
+# # 	print '"' + name+ '": function(){'
+# # 	print '\treturn '+ str(index) + ';'
+# # 	print'},'
+# # print '"' + exchangeNames[-1] + '": function(){'
+# # print '\treturn' + str(index+1) + ';'
+# # print'}'
+#     print '"' + name.lower()+ '": ' + str(index) + ','
+# print '"' + exchangeNames[-1].lower() + '": ' + str(index+1)
+
+
+
+### this prints the numbers to exchange lookup table:
 name = ""
 # print exchangeNames 
 for index, name in enumerate(exchangeNames[:-1]): #loops through all but last element in list
-# 	print '"' + name+ '": function(){'
-# 	print '\treturn '+ str(index) + ';'
-# 	print'},'
-# print '"' + exchangeNames[-1] + '": function(){'
-# print '\treturn' + str(index+1) + ';'
-# print'}'
-	print '"' + name.lower()+ '": ' + str(index) + ','
-print '"' + exchangeNames[-1].lower() + '": ' + str(index+1)
+	print '"' + str(index)+ '": "' + name.lower() + '",'
+print '"' + str(index+1) + '": "' + exchangeNames[-1].lower() +'"'
+
 
 ##############################################################################
 ###############################PART THREE#####################################

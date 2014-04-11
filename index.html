@@ -37,6 +37,7 @@ emiliebarnard.com
 	    var map;
 	    var shareLinkURL = "http://redditgiftsmap.com/s/?";
 	    var privateLinkURL = "http://redditgiftsmap.com/?";
+	    var loadedURL = window.location.href;  
 	    //var bounds = new google.maps.LatLngBounds(new google.maps.LatLng(57.1, -137.9),new google.maps.LatLng(56.8, -53.2),new google.maps.LatLng(31, -90.7)); //set this so it fits to the default map loaded
 	    var bounds = new google.maps.LatLngBounds(new google.maps.LatLng(39.828175, -98.579500));
 	      function initialize() {
@@ -52,9 +53,14 @@ emiliebarnard.com
 	        map = new google.maps.Map(document.getElementById("map-canvas"),
 	            mapOptions);
 	            
-	            
-	   		}
-	      
+	        
+	          
+	      	
+	      	if (loadedURL.localeCompare("http://redditgiftsmap.com/") != 0 && loadedURL.localeCompare("http://www.redditgiftsmap.com/") != 0){ //case that we're loaded previously dropped pins from a private link
+		      	loadHome();
+		      	// loadPins();
+	      	}
+	      }
 		  
 		  google.maps.event.addDomListener(window, 'load', initialize);
 		  var geocoder;
@@ -411,7 +417,199 @@ emiliebarnard.com
 									"tim burton": 110
 					   			/* use the python script (part two) to generate the above part of the exchange name to number lookup table: */	  
 					   		  }; 
-					   		  
+		function loadHome(){
+			//first we'll check for home info
+			var userInfoInURL = "&";
+			
+			if (loadedURL.indexOf("http://redditgiftsmap.com/?") != -1){
+				userInfoInURL = loadedURL.replace("http://redditgiftsmap.com/?","");
+			}
+			else {
+				userInfoInURL = loadedURL.replace("http://www.redditgiftsmap.com/?","");
+			}
+
+			
+			   		var userInfo = "";
+			   		var i = 0;
+			   		var commaCount = 0;
+			   		var lat = "";
+			   		var lng = "";
+			   		var userName = "";
+			   		
+			   		while (userInfoInURL.charAt(i).localeCompare("&") != 0){
+				   		userInfo += userInfoInURL.charAt(i);
+				   		//comma check:
+				   		if (userInfoInURL.charAt(i).localeCompare(",") == 0){
+					   		commaCount ++;
+				   		}
+				   		i++;
+			   		}
+			   		i=0; //reset
+			   		loadedURL = loadedURL.replace(userInfo,""); //removes the user info from the loaded url, leaving just the info regarding giftee pins
+			   		
+			   		//if comma count is zero, no user info given
+			   		if (commaCount > 0){
+				   		
+				   		//if comma count is one, we have the location but not the username:
+				   		   		if (commaCount == 1){
+				   			   		while (userInfo.charAt(i).localeCompare(",") != 0){
+				   			   			lat += userInfo.charAt(i);
+				   			   			i++;
+				   			   		}
+				   			   		lat = parseFloat(lat, "10");
+				   			   		
+				   			   		i++; //get past the comma
+				   			   		
+				   			   		while (i < userInfo.length){
+				   				   		lng += userInfo.charAt(i);
+				   				   		i++;
+				   			   		}
+				   			   		
+				   			   		lng = parseFloat(lng, "10");
+				   			   		
+				   			   		shareLinkURL = "http://redditgiftsmap.com/s/?";
+				   			   		privateLinkURL = "http://redditgiftsmap.com/?";
+				   			   		
+				   			   		shareLinkURL += lat.toFixed(1) + "," + lng.toFixed(1);
+				   			   		privateLinkURL += lat.toFixed(1) + "," + lng.toFixed(1);
+				   			   		
+				   			   		
+				   			   		//drop home pin:
+				   			   		// geocoder = new google.maps.Geocoder();
+				   			   		
+				   			   		var homeDialog = '<div class="homeContent">' + '<p>home sweet home</p>' + '</div>';
+				   			   		
+				   			   		var homeWindow = new google.maps.InfoWindow({
+				   			   			  content: homeDialog,
+				   			   			  maxWidth: 100
+				   			   		  });
+				   			   		
+				   			   			var pinPos = new google.maps.LatLng(lat, lng);
+				   			   			
+				   			   			//extend map to fit all pins
+				   			   			bounds.extend(pinPos);
+				   			   			map.fitBounds(bounds);
+				   			   			
+				   			   			var pinImg = {
+				   			   				url: 'home@2x.png',
+				   			   				scaledSize: new google.maps.Size(homeIconDim, homeIconDim),
+				   			   				origin: new google.maps.Point(0, 0),
+				   			   				anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
+				   			   			};
+				   			   			homeMarker = new google.maps.Marker({
+				   			   				position: pinPos,
+				   			   				map: map,
+				   			   				icon: pinImg,
+				   			   				title: "Home Sweet Home"
+				   			   			});
+				   			   			google.maps.event.addListener(homeMarker, 'click', function() {
+				   				   			for (var j = 0; j < pinWindows.length; j++){
+				   				   				pinWindows[j].close();
+				   				   			}
+				   			   				homeWindow.open(map,this);
+				   			   			  });
+				   			   			  
+				   			   			google.maps.event.addListener(homeMarker, 'rightclick', function() {
+				   			   			    homeMarker.setMap(null);
+				   			   			    homeMarker = null;
+				   			   			    shareLinkURL = "http://redditgiftsmap.com/s/?";
+				   			   			    privateLinkURL = "http://redditgiftsmap.com/?";
+				   			   			  });  
+				   			   			 
+				   			   			 pinWindows.push(homeWindow);
+				   		   		
+				   			}
+				   			
+				   			//if comma count is two, we have the location and the username:
+				   				   		   		if (commaCount == 2){
+				   				   			   		//get username:
+				   				   			   		while (userInfo.charAt(i).localeCompare(",") != 0){
+				   				   				   		userName += userInfo.charAt(i);
+				   				   				   		i++;
+				   				   				   	}
+				   				   				  	shareLinkURL += userName + ",";
+				   				   				  	privateLinkURL += userName + ",";
+				   				   				   	
+				   				   				   	i++; //get past the comma
+				   				   				   	
+				   				   				   	//get position
+				   				   				   	while (userInfo.charAt(i).localeCompare(",") != 0){
+				   				   				   	   			lat += userInfo.charAt(i);
+				   				   				   	   			i++;
+				   				   					}
+				   				   					lat = parseFloat(lat, "10");
+				   				   					
+				   				   					
+				   				   					i++; //get past the comma
+				   				   					
+				   				   					while (i < userInfo.length){
+				   				   					   	lng += userInfo.charAt(i);
+				   				   					   	i++;
+				   				   					}
+				   				   					lng = parseFloat(lng, "10");
+				   				   					
+				   				   					shareLinkURL += lat.toFixed(1) + "," + lng.toFixed(1);
+				   				   					privateLinkURL += lat.toFixed(1) + "," + lng.toFixed(1);
+				   				   					//drop home pin:
+				   				   					
+				   				   					var homeDialog = '<div class="homeContent">' + '<p>home of <a href="http://reddit.com/u/' + userName + '" target="_blank">/u/' + userName + '</a></p>' + '</div>';
+				   				   					
+				   				   					var homeWindow = new google.maps.InfoWindow({
+				   				   						  content: homeDialog,
+				   				   						  maxWidth: 100
+				   				   					  });
+				   				   					var pinPos = new google.maps.LatLng(lat, lng);
+				   				   					
+				   				   					//extend map to fit all pins
+				   				   					bounds.extend(pinPos);
+				   				   					map.fitBounds(bounds);
+				   				   					
+				   				   					  
+				   				   					  var pinImg = {
+				   				   					  	url: 'home@2x.png',
+				   				   					  	scaledSize: new google.maps.Size(homeIconDim, homeIconDim),
+				   				   					  	origin: new google.maps.Point(0, 0),
+				   				   					  	anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
+				   				   					  };
+				   				   						
+				   				   					  
+				   				   					homeMarker = new google.maps.Marker({
+				   				   						position: pinPos,
+				   				   						map: map,
+				   				   						icon: pinImg,
+				   				   						title: "Home Sweet Home"
+				   				   					});
+				   				   					google.maps.event.addListener(homeMarker, 'click', function() {
+				   				   						//close current windows
+				   				   						for (var j = 0; j < pinWindows.length; j++){
+				   				   							pinWindows[j].close();
+				   				   						}
+				   				   						homeWindow.open(map,this);
+				   				   					  });
+				   				   					  google.maps.event.addListener(homeMarker, 'rightclick', function() {
+				   				   					     homeMarker.setMap(null);
+				   				   					     homeMarker = null;
+				   				   					     shareLinkURL = "http://redditgiftsmap.com/s/?";
+				   				   					     privateLinkURL = "http://redditgiftsmap.com/?";
+				   				   					   });  
+				   				   					  
+				   				   					  pinWindows.push(homeWindow);
+				   				   					
+				   				   						var pinPos = new google.maps.LatLng(lat, lng);
+				   				   						
+				   				   						var pinImg = {
+				   				   							url: 'home@2x.png',
+				   				   							scaledSize: new google.maps.Size(homeIconDim, homeIconDim),
+				   				   							origin: new google.maps.Point(0, 0),
+				   				   							anchor: new google.maps.Point(homeIconDim/2, homeIconDim/2)
+				   				   						};
+				   				   		
+				   				   			}
+	   		
+
+				   	}
+
+		}			   		  
 		
 		function dropPin(){
 		
@@ -654,9 +852,25 @@ emiliebarnard.com
 			
 			
 			var printedShareLink = document.getElementById("shareLink");
+			var printedPrivateLink = document.getElementById("privateLink");
 			var shareLinkToSet = shareLinkURL + encodedPinInfo;
 			var privateLinkToSet = privateLinkURL + encodedPinInfo;
-			
+			//link shortening:
+			var request2 = gapi.client.urlshortener.url.insert({
+				'resource': {
+				  'longUrl': privateLinkToSet
+				}
+				});
+			request2.execute(function(response2) 
+					{
+				
+						if(response2.id != null)
+						{
+							privateLinkToSet = response2.id;
+						}
+						printedPrivateLink.innerHTML = privateLinkToSet;
+						printedPrivateLink.setAttribute('href', privateLinkToSet);
+					});
 			//link shortening:
 			var request = gapi.client.urlshortener.url.insert({
 				'resource': {
@@ -674,30 +888,11 @@ emiliebarnard.com
 						printedShareLink.innerHTML = shareLinkToSet;
 						printedShareLink.setAttribute('href', shareLinkToSet);
 					});
+		
+		
 						
 			
 		}
-		
-		// //link shortening:
-		// 	var request2 = gapi.client.urlshortener.url.insert({
-		// 		'resource': {
-		// 		  'longUrl': privateLinkToSet
-		// 		}
-		// 		});
-		// 	request.execute(function(response) 
-		// 			{
-		// 		
-		// 				if(response.id != null)
-		// 				{
-		// 					// alert(response.id);
-		// 					privateLinkToSet = response.id;
-		// 				}
-		// 				printedShareLink.innerHTML = privateLinkToSet;
-		// 				printedShareLink.setAttribute('href', shareLinkURL + encodedPinInfo);
-		// 			});
-		// 				
-		// 	
-		// }
 		
 		//for URL shortening
 		function load() {
@@ -741,7 +936,7 @@ emiliebarnard.com
   	  	<div id="shareBox">
   	  		<a href="javascript:closeShareLinks();"><div id="closeButton"></div></a>
   	  		<!-- <div id="closeShareBox"><a href="javascript:closeShareLinks();"><img src="x.png" alt="close" height="10" width="10"/></a></div> -->
-  	  		<p>Private link: 
+  	  		<p>Private link: <a href="" id="privateLink" target=_blank></a>
 	  	  	<br>Share link: <a href="" id="shareLink" target=_blank></a> <!-- change this to actual link later -->
 	  	  	<!-- <br><br><a href="javascript:closeShareLinks();"><img src="x.png" alt="close" height="10" width="10"/></a> -->
 	  	  	</p>

@@ -27,7 +27,7 @@ emiliebarnard.com
 	    	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
 	    </script>
 	    
-	    <script type="text/javascript" src="/redditgiftsmapmaker/retina.js"></script>
+	    <script type="text/javascript" src="/retina.js"></script>
 	    
 	    <script type="text/javascript">
 	    
@@ -36,6 +36,7 @@ emiliebarnard.com
 	    var homeIconDim = 28;
 	    var map;
 	    var shareLinkURL = "http://redditgiftsmap.com/s/?";
+	    var privateLinkURL = "http://redditgiftsmap.com/?";
 	    //var bounds = new google.maps.LatLngBounds(new google.maps.LatLng(57.1, -137.9),new google.maps.LatLng(56.8, -53.2),new google.maps.LatLng(31, -90.7)); //set this so it fits to the default map loaded
 	    var bounds = new google.maps.LatLngBounds(new google.maps.LatLng(39.828175, -98.579500));
 	      function initialize() {
@@ -523,7 +524,8 @@ emiliebarnard.com
 		function setHome(){
 			
 			if ( $('#home').val().localeCompare("") != 0){
-				shareLinkURL = "http:/redditgiftsmap.com/s/?";
+				shareLinkURL = "http://redditgiftsmap.com/s/?";
+				privateLinkURL = "http://redditgiftsmap.com/?";
 				
 				if (homeMarker != null){
 					homeMarker.setMap(null);
@@ -539,11 +541,13 @@ emiliebarnard.com
 				
 				if (user.localeCompare("") != 0){
 					homeDialog += '<p>home of <a href="http://reddit.com/u/' + user + '" target="_blank">/u/' + user + '</a></p>' + '</div>';
-					shareLinkURL += user +",";
+					shareLinkURL += user + ",";
+					privateLinkURL += user + ",";
 				}
 				else{
 					homeDialog += '<p>home sweet home</p>' + '</div>';
 					shareLinkURL = "http://redditgiftsmap.com/s/?";
+					privateLinkURL = "http://redditgiftsmap.com/?";
 				}
 				var homeWindow = new google.maps.InfoWindow({
 				      content: homeDialog,
@@ -565,6 +569,7 @@ emiliebarnard.com
 					};
 					
 					shareLinkURL += lat.toFixed(1) + "," + lng.toFixed(1);
+					privateLinkURL += lat.toFixed(1) + "," + lng.toFixed(1);
 					
 					homeMarker = new google.maps.Marker({
 						position: pinPos,
@@ -592,6 +597,7 @@ emiliebarnard.com
 					    homeMarker.setMap(null);
 					    homeMarker = null;
 					    shareLinkURL = "http://redditgiftsmap.com/s/?";
+					    privateLinkURL = "http://redditgiftsmap.com/?";
 					  });
 					  
 					  	map.setZoom(10);
@@ -600,11 +606,6 @@ emiliebarnard.com
 					  //fit map to include new pin
 					    bounds.extend(pinPos);
 					    map.fitBounds(bounds);
-					    //reset zoom
-					    // var listener = google.maps.event.addListener(map, "idle", function () {
-					    //   	map.setZoom(3);
-					    //   	google.maps.event.removeListener(listener);
-					    //   });  
 					
 				});
 			}			
@@ -653,9 +654,58 @@ emiliebarnard.com
 			
 			
 			var printedShareLink = document.getElementById("shareLink");
-			printedShareLink.innerHTML = shareLinkURL + encodedPinInfo;
-			printedShareLink.setAttribute('href', shareLinkURL + encodedPinInfo);
+			var shareLinkToSet = shareLinkURL + encodedPinInfo;
+			var privateLinkToSet = privateLinkURL + encodedPinInfo;
+			
+			//link shortening:
+			var request = gapi.client.urlshortener.url.insert({
+				'resource': {
+				  'longUrl': shareLinkToSet
+				}
+				});
+			request.execute(function(response) 
+					{
+				
+						if(response.id != null)
+						{
+							// alert(response.id);
+							shareLinkToSet = response.id;
+						}
+						printedShareLink.innerHTML = shareLinkToSet;
+						printedShareLink.setAttribute('href', shareLinkToSet);
+					});
+						
+			
 		}
+		
+		// //link shortening:
+		// 	var request2 = gapi.client.urlshortener.url.insert({
+		// 		'resource': {
+		// 		  'longUrl': privateLinkToSet
+		// 		}
+		// 		});
+		// 	request.execute(function(response) 
+		// 			{
+		// 		
+		// 				if(response.id != null)
+		// 				{
+		// 					// alert(response.id);
+		// 					privateLinkToSet = response.id;
+		// 				}
+		// 				printedShareLink.innerHTML = privateLinkToSet;
+		// 				printedShareLink.setAttribute('href', shareLinkURL + encodedPinInfo);
+		// 			});
+		// 				
+		// 	
+		// }
+		
+		//for URL shortening
+		function load() {
+		  gapi.client.setApiKey('AIzaSyBauEtRQ17iTKbRU3wC4QdFJ9ZzgJeHFF8');
+		  gapi.client.load('urlshortener', 'v1',function(){});
+		}
+		
+
 		
 		$(document).ready(function(){		
 			/* $('#shareBox').hide(); */
@@ -677,6 +727,8 @@ emiliebarnard.com
     
 }); 
 	    </script>
+	    
+	    <script src="https://apis.google.com/js/client.js?onload=load"></script>
     
   </head>
   <body>

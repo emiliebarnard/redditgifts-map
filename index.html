@@ -35,7 +35,7 @@ emiliebarnard.com
 	    var iconSizeY = 51;
 	    var homeIconDim = 28;
 	    var map;
-	    var shareLinkURL = "http://embarnard.com/redditgiftsmapmaker/share/?";
+	    var shareLinkURL = "http://redditgiftsmap.com/s/?";
 	    //var bounds = new google.maps.LatLngBounds(new google.maps.LatLng(57.1, -137.9),new google.maps.LatLng(56.8, -53.2),new google.maps.LatLng(31, -90.7)); //set this so it fits to the default map loaded
 	    var bounds = new google.maps.LatLngBounds(new google.maps.LatLng(39.828175, -98.579500));
 	      function initialize() {
@@ -507,7 +507,7 @@ emiliebarnard.com
 						}
 					  });
 					  
-					  	map.setZoom(4);
+					  	map.setZoom(10);
 
 					  
 					  //fit map to include new pin
@@ -523,7 +523,7 @@ emiliebarnard.com
 		function setHome(){
 			
 			if ( $('#home').val().localeCompare("") != 0){
-				shareLinkURL = "http://embarnard.com/redditgiftsmapmaker/share/?";
+				shareLinkURL = "http:/redditgiftsmap.com/s/?";
 				
 				if (homeMarker != null){
 					homeMarker.setMap(null);
@@ -543,7 +543,7 @@ emiliebarnard.com
 				}
 				else{
 					homeDialog += '<p>home sweet home</p>' + '</div>';
-					shareLinkURL = "http://embarnard.com/redditgiftsmapmaker/share/?";
+					shareLinkURL = "http://redditgiftsmap.com/s/?";
 				}
 				var homeWindow = new google.maps.InfoWindow({
 				      content: homeDialog,
@@ -591,10 +591,10 @@ emiliebarnard.com
 					google.maps.event.addListener(homeMarker, 'rightclick', function() {
 					    homeMarker.setMap(null);
 					    homeMarker = null;
-					    shareLinkURL = "http://embarnard.com/redditgiftsmapmaker/share/?";
+					    shareLinkURL = "http://redditgiftsmap.com/s/?";
 					  });
 					  
-					  	map.setZoom(4);
+					  	map.setZoom(10);
 
 					  
 					  //fit map to include new pin

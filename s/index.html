@@ -490,7 +490,7 @@ emiliebarnard.com
 	   		
 	   	function dropPins(){
 		   	//first we need to separate the pins
-		   	var pinInfoInURL = loadedURL.replace("http://embarnard.com/redditgiftsmapmaker/share/?&","");
+		   	var pinInfoInURL = loadedURL.replace("http://redditgiftsmap.com/s/?&","");
 		   	pinInfoInURL = pinInfoInURL.slice(0, -1); //remove last &
 		   	
 		   	var arrayOfPinInfo = pinInfoInURL.split("&");
@@ -505,7 +505,7 @@ emiliebarnard.com
 	   	
 	   	
 	   	function setHeader(){ //also sets home
-	   		var userInfoInURL = loadedURL.replace("http://embarnard.com/redditgiftsmapmaker/share/?","");
+	   		var userInfoInURL = loadedURL.replace("http://redditgiftsmap.com/s/?","");
 	   		var userInfo = "";
 	   		var i = 0;
 	   		var commaCount = 0;

@@ -58,7 +58,7 @@ emiliebarnard.com
 	      	
 	      	if (loadedURL.localeCompare("http://redditgiftsmap.com/") != 0 && loadedURL.localeCompare("http://www.redditgiftsmap.com/") != 0){ //case that we're loaded previously dropped pins from a private link
 		      	loadHome();
-		      	// loadPins();
+		      	loadPins();
 	      	}
 	      }
 		  
@@ -69,6 +69,123 @@ emiliebarnard.com
 		  var rematchesArray = new Array();
 		  var homeMarker = new google.maps.Marker();
 		  var pinWindows = new Array();
+		  
+		  
+		  		var numberToExchange = {
+		  			   		  /* use the python script (part two) to generate the below part of the number to exchange name lookup table: */
+		  			   		 "0": "secret santa 2009",
+		  			   		  "1": "arbitrary day 2010",
+		  			   		  "2": "secret santa 2010",
+		  			   		  "3": "r/books 2011",
+		  			   		  "4": "r/craftexchange 2011",
+		  			   		  "5": "r/snackexchange 2011",
+		  			   		  "6": "arbitrary day 2011",
+		  			   		  "7": "reddit trick or treat 2011",
+		  			   		  "8": "coffee mugs and tea cups 2011",
+		  			   		  "9": "secret santa 2011",
+		  			   		  "10": "t-shirts 2012",
+		  			   		  "11": "r/books 2012",
+		  			   		  "12": "yarn exchange 2012",
+		  			   		  "13": "cookbooks",
+		  			   		  "14": "my little pony",
+		  			   		  "15": "board games",
+		  			   		  "16": "awesomesocks",
+		  			   		  "17": "redditgifts for the troops",
+		  			   		  "18": "arbitrary day 2012",
+		  			   		  "19": "arbitrary day plus",
+		  			   		  "20": "presents for pets",
+		  			   		  "21": "vinyl exchange",
+		  			   		  "22": "decorate your dorm",
+		  			   		  "23": "comic books and graphic novels",
+		  			   		  "24": "reddit gifts for the teachers",
+		  			   		  "25": "doctor who",
+		  			   		  "26": "postcards",
+		  			   		  "27": "ties",
+		  			   		  "28": "makeup and nail polish",
+		  			   		  "29": "decorate my cubicle",
+		  			   		  "30": "reddit trick or treat plus",
+		  			   		  "31": "reddit trick or treat 2012",
+		  			   		  "32": "secret santa 2012",
+		  			   		  "33": "holiday greeting card exchange",
+		  			   		  "34": "pokemon exchange",
+		  			   		  "35": "snack exchange 2013",
+		  			   		  "36": "hats and scarves exchange",
+		  			   		  "37": "coffee and tea exchange",
+		  			   		  "38": "socks exchange",
+		  			   		  "39": "book exchange 2013",
+		  			   		  "40": "yarn exchange 2013",
+		  			   		  "41": "fantasy exchange",
+		  			   		  "42": "adventure time exchange",
+		  			   		  "43": "t-shirt exchange",
+		  			   		  "44": "manga exchange",
+		  			   		  "45": "horror exchange",
+		  			   		  "46": "awesome smell exchange",
+		  			   		  "47": "simple pleasures exchange",
+		  			   		  "48": "art prints exchange",
+		  			   		  "49": "plushy exchange",
+		  			   		  "50": "condiments exchange",
+		  			   		  "51": "star wars exchange",
+		  			   		  "52": "ameristralia exchange",
+		  			   		  "53": "phone cases exchange",
+		  			   		  "54": "doctor who (almost) 50th anniversary exchange",
+		  			   		  "55": "pens and stationery exchange",
+		  			   		  "56": "disney exchange",
+		  			   		  "57": "star trek exchange",
+		  			   		  "58": "nostalgia exchange",
+		  			   		  "59": "arbitrary day plus 2013",
+		  			   		  "60": "arbitrary day 2013",
+		  			   		  "61": "nintendo exchange",
+		  			   		  "62": "pints and shot glasses exchange",
+		  			   		  "63": "magnets exchange",
+		  			   		  "64": "game of thrones exchange",
+		  			   		  "65": "hometown exchange",
+		  			   		  "66": "arrested development exchange",
+		  			   		  "67": "now sharing absurdity - the nsa gift exchange",
+		  			   		  "68": "the world's end exchange plus",
+		  			   		  "69": "the world's end exchange",
+		  			   		  "70": "redditgifts for the teachers 2013",
+		  			   		  "71": "zombies",
+		  			   		  "72": "trading card games",
+		  			   		  "73": "kitchen goods",
+		  			   		  "74": "breaking bad",
+		  			   		  "75": "board games 2013",
+		  			   		  "76": "avatar: the last airbender",
+		  			   		  "77": "nfl",
+		  			   		  "78": "blind boxes and bags",
+		  			   		  "79": "whedon-verse",
+		  			   		  "80": "presents for pets 2013",
+		  			   		  "81": "reddit trick or treat 2013 plus",
+		  			   		  "82": "reddit trick or treat 2013",
+		  			   		  "83": "secret santa 2013",
+		  			   		  "84": "holiday cards 2013",
+		  			   		  "85": "dinosaurs",
+		  			   		  "86": "studio ghibli",
+		  			   		  "87": "awesome aprons",
+		  			   		  "88": "lunchboxes",
+		  			   		  "89": "harry potter",
+		  			   		  "90": "dc comics",
+		  			   		  "91": "100th exchange extravaganza!",
+		  			   		  "92": "snacks 2014",
+		  			   		  "93": "socks 2014",
+		  			   		  "94": "yarn 2014",
+		  			   		  "95": "stickers",
+		  			   		  "96": "lego",
+		  			   		  "97": "jim henson",
+		  			   		  "98": "ghostbusters",
+		  			   		  "99": "books 2014",
+		  			   		  "100": "archer",
+		  			   		  "101": "ties 2014",
+		  			   		  "102": "t-shirt 2014",
+		  			   		  "103": "soccer",
+		  			   		  "104": "tabletop rpgs",
+		  			   		  "105": "puzzles",
+		  			   		  "106": "ugly mugs",
+		  			   		  "107": "marvel universe",
+		  			   		  "108": "makeup & nail polish 2014",
+		  			   		  "109": "hockey",
+		  			   		  "110": "tim burton"		   		  /* use the python script (part two) to generate the above part of the number to exchange lookup table: */	
+		  		   		  }; 
+
 		  
 			  var exchangeNumber = {
 					/* use the python script (part two) to generate the below part of the exchange name to number lookup table: */
@@ -423,9 +540,11 @@ emiliebarnard.com
 			
 			if (loadedURL.indexOf("http://redditgiftsmap.com/?") != -1){
 				userInfoInURL = loadedURL.replace("http://redditgiftsmap.com/?","");
+				loadedURL = loadedURL.replace("http://redditgiftsmap.com/?","");
 			}
 			else {
 				userInfoInURL = loadedURL.replace("http://www.redditgiftsmap.com/?","");
+				loadedURL = loadedURL.replace("http://www.redditgiftsmap.com/?","");
 			}
 
 			
@@ -445,7 +564,7 @@ emiliebarnard.com
 				   		i++;
 			   		}
 			   		i=0; //reset
-			   		loadedURL = loadedURL.replace(userInfo,""); //removes the user info from the loaded url, leaving just the info regarding giftee pins
+			   		loadedURL = loadedURL.replace(userInfo + "&",""); //removes the user info from the loaded url, leaving just the info regarding giftee pins
 			   		
 			   		//if comma count is zero, no user info given
 			   		if (commaCount > 0){
@@ -610,6 +729,127 @@ emiliebarnard.com
 				   	}
 
 		}			   		  
+		
+		function dropThisPin(pinStuff){
+			   	
+			   	// var pinMarker = new google.maps.Marker();
+			   	  	// var pinWindow = new google.maps.InfoWindow();
+			   	  	var pinDialog = '<div class="pinContent">';
+			   	  
+			   	  	// first we split up the info
+			   	  	var arrayOfThisPin = pinStuff.split(",");
+			   	  	
+			   	  	//name of exchange
+			   	  	var exchange = numberToExchange[arrayOfThisPin[0]];
+			   	  	
+			   	  	//position of pin:
+			   	  	var lat = arrayOfThisPin[1];
+			   	  	var lng = arrayOfThisPin[2];
+			   	  	var username = "";
+			   	  			   	  	
+			   		 	//now we have to check the optional parameters
+			   		
+			   		 	if (arrayOfThisPin.length == 5){	//case that all optional fields were filled out (username and it's a rematch case)
+			   			username = arrayOfThisPin[3];
+			   			pinDialog += '<p><b>exchange</b>: ' +  exchange + ' (rematch)';
+			   			pinDialog += '<br><b>giftee</b>: <a href="http://reddit.com/u/' + username + '" target="_blank">/u/' + username + '</a>';
+			   			rematchesArray.push(true);
+			   		}
+			   		
+			   		if (arrayOfThisPin.length == 4 ){ //case that one optional field was filled out (username or rematch)
+			   			if (arrayOfThisPin[3].localeCompare("") == 0){ //rematch case
+			   		 	pinDialog += '<p><b>exchange</b>: ' +  exchange + ' (rematch)';
+				   		rematchesArray.push(true);
+			   			}
+			   			else{ //username case
+			   		 	username = arrayOfThisPin[3];
+			   		 	pinDialog += '<p><b>exchange</b>: ' +  exchange;
+			   		 	pinDialog += '<br><b>giftee</b>: <a href="http://reddit.com/u/' + username + '" target="_blank">/u/' + username + '</a>';
+			   		 	rematchesArray.push(false);
+			   			}
+			   			
+			   		}
+			   		
+			   		if (arrayOfThisPin.length == 3){ //required fields only case
+			   			pinDialog += '<p><b>exchange</b>: ' +  exchange;
+				   		rematchesArray.push(false);
+			   		}
+			   		
+			   		pinDialog += '</p></div>';
+			   		
+			   		var pinWindow = new google.maps.InfoWindow({
+			   			  content: pinDialog,
+			   			  maxWidth: 150
+			   			  });
+			   		
+			   		
+			   		var pinPos = new google.maps.LatLng(lat, lng);
+			   		
+			   		//fit map to include new pin
+			   		bounds.extend(pinPos);
+			   		map.fitBounds(bounds);
+			   		
+			   		
+			   		var pinImg = {
+			   			url: exchangeImageURL[exchangeNumberLowerCase[exchange]],
+			   			scaledSize: new google.maps.Size(iconSizeX, iconSizeY),
+			   			origin: new google.maps.Point(0, 0),
+			   			anchor: new google.maps.Point(iconSizeX/2, iconSizeY/2)
+			   		};
+			   		
+			   		var pinMarker = new google.maps.Marker({
+			   			position: pinPos,
+			   			map: map,
+			   			icon: pinImg,
+			   			title: exchange
+			   		});
+			   		
+			   		google.maps.event.addListener(pinMarker, 'click', function() {
+				   		//close current windows
+				   		for (var j = 0; j < pinWindows.length; j++){
+				   			pinWindows[j].close();
+				   		}
+			   		  pinWindow.open(map,this);
+			   		});
+			   		
+			   		pinWindows.push(pinWindow);
+			   		
+			   		google.maps.event.addListener(pinMarker, 'rightclick', function() {
+			   			var markerIndex = markersArray.indexOf(pinMarker);
+			   			
+			   			pinMarker.setMap(null);
+			   			pinMarker = null;
+			   			
+			   			
+			   			markersArray.splice(markerIndex, 1);
+			   			gifteesArray.splice(markerIndex, 1);
+			   			rematchesArray.splice(markerIndex, 1);
+			   			
+			   			if (markersArray[markersArray.length-1] == null){
+			   				document.getElementById("undoPinButton").disabled = true;
+			   				document.getElementById("mapLinkButton").disabled = true;
+			   		
+			   		}
+			   	});
+			   	
+			   	markersArray.push(pinMarker);
+			   	gifteesArray.push(username);
+		   	}
+		   	
+		   	
+		   	
+		function loadPins(){
+			 //first we need to separate the pins
+			    	// var pinInfoInURL = loadedURL.replace("http://redditgiftsmap.com/s/?&","");
+			    	pinInfoInURL = loadedURL.slice(0, -1); //remove last &
+			    	var arrayOfPinInfo = pinInfoInURL.split("&");
+
+			    	//then we drop them like we did in other file
+			    	for (var j = 0; j < arrayOfPinInfo.length; j++){
+			 	   	dropThisPin(arrayOfPinInfo[j]);
+			    	}
+
+		}
 		
 		function dropPin(){
 		

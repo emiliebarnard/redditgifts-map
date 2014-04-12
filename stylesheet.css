@@ -17,7 +17,7 @@ p {
 }
 
 b, i, u {
-	color: #000000;
+	color: #888888;
 	font-family: verdana;
 	font-size: 12px;
 }
@@ -60,7 +60,7 @@ h2 {
 #wrapper {
 	width: 625px;
 	margin: 0 auto;
-	padding-top: 20px;
+	/* padding-top: 20px; */
 }
 
 #userBox{

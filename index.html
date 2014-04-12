@@ -1153,11 +1153,35 @@ emiliebarnard.com
 				});
 	
 		/* This allows the user to press enter rather than the start encryption button while in the rule number form box */
-		  $("input").keypress(function(event) {
-		    if (event.which == 13 && $('#postCode').val().localeCompare("") != 0) {
-		        $("#dropPinButton").click();
-		    }
-	  });
+		  // $("input").keypress(function(event) {
+		  //   if (event.which == 13 && $('#postCode').val().localeCompare("") != 0) {
+		  //       $("#dropPinButton").click();
+		  //   }
+		  $('#home').keydown(function (e){
+		  	if(e.keyCode == 13){
+		  		setHome();
+		  	}
+		  	})
+		  	
+		  $('#homeUsername').keydown(function (e){
+		  	if(e.keyCode == 13){
+		  		setHome();
+		  	}
+		  	})
+		 
+		  $('#postCode').keydown(function (e){
+		  	if(e.keyCode == 13){
+		  		dropPin();
+		  	}
+		  	})
+		  	$('#gifteeUsername').keydown(function (e){
+		  		if(e.keyCode == 13){
+		  			dropPin();
+		  		}
+		  		})		
+		  		
+		  // })
+	  // });
 	  
     
 }); 

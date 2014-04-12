@@ -10,6 +10,7 @@ emiliebarnard.com
   <link rel="icon" type="image/png" href="gift@2x.png"/>
   <title>redditgifts map</title>
   <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+  <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'/>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   
       <!--
@@ -59,6 +60,8 @@ emiliebarnard.com
 	      	if (loadedURL.localeCompare("http://redditgiftsmap.com/") != 0 && loadedURL.localeCompare("http://www.redditgiftsmap.com/") != 0){ //case that we're loaded previously dropped pins from a private link
 		      	loadHome();
 		      	loadPins();
+		      	document.getElementById("mapLinkButton").disabled = false;
+		      	document.getElementById("undoPinButton").disabled = false;
 	      	}
 	      }
 		  

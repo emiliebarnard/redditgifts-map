@@ -14,6 +14,8 @@ import urllib2
 from bs4 import BeautifulSoup
 
 #as of 4/7 there are only three pages of exchanges
+#this has been updated to reflect the four pages
+
 soup1 = BeautifulSoup(urllib2.urlopen('http://redditgifts.com/exchanges').read())
 
 soup2 = BeautifulSoup(urllib2.urlopen('http://redditgifts.com/exchanges/?page=2').read())
@@ -67,22 +69,23 @@ for linkElement in allExchangeLinks:
 
 ###for share link table, add lowercase condition
 
-# name = ""
-#  # print exchangeNames 
-# for index, name in enumerate(exchangeNames[:-1]): #loops through all but last element in list
-#     print '"' + name.lower()+ '": ' + str(index) + ','
-# print '"' + exchangeNames[-1].lower() + '": ' + str(index+1)
+  #   index = 0
+  #   name = ""
+  # # print exchangeNames 
+  #   for index, name in enumerate(exchangeNames[:-1]): #loops through all but last element in list
+  #       print '"' + name.lower()+ '": ' + str(index) + ','
+  #   print '"' + exchangeNames[-1].lower() + '": ' + str(index+1)
 
-##same but not lowercase:
-# name = ""
-#  # print exchangeNames 
-# for index, name in enumerate(exchangeNames[:-1]): #loops through all but last element in list
-#     print '"' + name + '": ' + str(index) + ','
-# print '"' + exchangeNames[-1] + '": ' + str(index+1)
+# #same but not lowercase:
+#     name = ""
+#   # print exchangeNames 
+#     for index, name in enumerate(exchangeNames[:-1]): #loops through all but last element in list
+#             print '"' + name + '": ' + str(index) + ','
+#         print '"' + exchangeNames[-1] + '": ' + str(index+1)
 
 
 
-# ### this prints the numbers to exchange lookup table:
+### this prints the numbers to exchange lookup table:
 # name = ""
 # # print exchangeNames 
 # for index, name in enumerate(exchangeNames[:-1]): #loops through all but last element in list
@@ -110,12 +113,12 @@ allImages = exchangeImages4 + exchangeImages3 + exchangeImages2 + exchangeImages
 allImageURLs = []
 
 for imageURL in allImages:
-	allImageURLs.append(imageURL["src"])
-	# str(imageURL).replace('<img src="',"")
-	# str(imageURL).replace('" width="100"/>',"")
+    allImageURLs.append(imageURL["src"])
+    # str(imageURL).replace('<img src="',"")
+    # str(imageURL).replace('" width="100"/>',"")
 
 #####this will print the code needed lookup the image url by exchange number
 
 for index, imageURL in enumerate(allImageURLs[:-1]): #loops through all but last element in list
-	print '"' + str(index) + '": "' + imageURL + '",'
+    print '"' + str(index) + '": "' + imageURL + '",'
 print '"' + str(index+1) + '": "' + allImageURLs[-1] +'"'

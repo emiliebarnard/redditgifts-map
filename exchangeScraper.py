@@ -10,6 +10,7 @@ beautiful soup: http://www.crummy.com/software/BeautifulSoup/
 ##############################################################################
 
 import re
+#from urllib.request import urlopen
 import urllib2
 from bs4 import BeautifulSoup
 
@@ -118,7 +119,7 @@ for imageURL in allImages:
     # str(imageURL).replace('" width="100"/>',"")
 
 #####this will print the code needed lookup the image url by exchange number
-
+index = 0
 for index, imageURL in enumerate(allImageURLs[:-1]): #loops through all but last element in list
     print '"' + str(index) + '": "' + imageURL + '",'
 print '"' + str(index+1) + '": "' + allImageURLs[-1] +'"'

@@ -1559,6 +1559,9 @@ emiliebarnard.com
 		  gapi.client.load('urlshortener', 'v1',function(){});
 		}
 		
+		
+
+		
 
 		
 		$(document).ready(function(){		
@@ -1605,6 +1608,8 @@ emiliebarnard.com
     
 }); 
 	    </script>
+		    
+		   
 	    
 	    <script src="https://apis.google.com/js/client.js?onload=load"></script>
 	   
@@ -1638,7 +1643,33 @@ emiliebarnard.com
   	  		<p>Private link: <a href="" id="privateLink" target=_blank></a>
 	  	  	<br>Share link: <a href="" id="shareLink" target=_blank></a> <!-- change this to actual link later -->
 	  	  	<!-- <br><br><a href="javascript:closeShareLinks();"><img src="x.png" alt="close" height="10" width="10"/></a> -->
+	  	  	<br><br>Copy this to post as reddit comment:
+	  	  	<br>
+			<!-- Target -->
+			<textarea id="redditCopyText" rows="4" cols="30">[text goes here](link goes here)</textarea>
+			
+			<!-- Trigger -->
+			<br>
+			<button class="btn" data-clipboard-action="copy" data-clipboard-target="#redditCopyText">
+			Copy
+			</button>
 	  	  	</p>
+	  	  	
+	  	  	
+	  	  	<script src="../dist/clipboard.min.js"></script>
+	  	  	
+	  	  	<!-- 3. Instantiate clipboard -->
+	  	  	<script>
+	  	  	var clipboard = new Clipboard('.btn');
+	  	  	
+	  	  	clipboard.on('success', function(e) {
+	  	  		console.log(e);
+	  	  	});
+	  	  	
+	  	  	clipboard.on('error', function(e) {
+	  	  		console.log(e);
+	  	  	});
+	  	  	</script>
   	</div>
 
   	<div id="wrapper">

@@ -39,7 +39,7 @@ exchangesTxt5 = open('exchanges5.txt', 'w')
 string5 = ""
 
 for exchange in exchangesTxt:
-    if exchange != "": #check for empty lines
+    if exchange != "" and exchange != "\n": #check for empty lines
         exchange = exchange.split(":")
         num = exchange[0][1:]
         num = num[:-1]

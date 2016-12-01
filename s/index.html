@@ -782,11 +782,13 @@ emiliebarnard.com
 		   		map.fitBounds(bounds);
 		   		
 		   		var pinImg = {
-		   			url: exchangeImageURL[exchangeNumber[exchange]],
+			   		url: exchangeImageURL[exchangeNumber[exchange]],
 		   			scaledSize: new google.maps.Size(iconSizeX, iconSizeY),
 		   			origin: new google.maps.Point(0, 0),
 		   			anchor: new google.maps.Point(iconSizeX/2, iconSizeY/2)
 		   		};
+		   		
+		   		//console.log(exchange);
 		   		
 		   		var pinMarker = new google.maps.Marker({
 		   			position: pinPos,
@@ -808,6 +810,7 @@ emiliebarnard.com
 	   	function dropPins(){
 		   	//first we need to separate the pins
 		   	var pinInfoInURL = loadedURL.replace("http://redditgiftsmap.com/s/?&","");
+		   	pinInfoInURL = loadedURL.replace("http://www.redditgiftsmap.com/s/?&","");
 		   	pinInfoInURL = pinInfoInURL.slice(0, -1); //remove last &
 		   	
 		   	var arrayOfPinInfo = pinInfoInURL.split("&");
@@ -823,6 +826,7 @@ emiliebarnard.com
 	   	
 	   	function setHeader(){ //also sets home
 	   		var userInfoInURL = loadedURL.replace("http://redditgiftsmap.com/s/?","");
+	   		userInfoInURL = loadedURL.replace("http://www.redditgiftsmap.com/s/?","");
 	   		var userInfo = "";
 	   		var i = 0;
 	   		var commaCount = 0;

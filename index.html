@@ -31,6 +31,7 @@ emiliebarnard.com
 	    <script type="text/javascript" src="/retina.js"></script>
 	    
 	    <script type="text/javascript">
+		var shareLinkToSet = "shareLink";
 	    
 	    var iconSizeX = 37; /* ratio should be close to 29/40 */
 	    var iconSizeY = 51;
@@ -1512,7 +1513,7 @@ emiliebarnard.com
 			
 			var printedShareLink = document.getElementById("shareLink");
 			var printedPrivateLink = document.getElementById("privateLink");
-			var shareLinkToSet = shareLinkURL + encodedPinInfo;
+			shareLinkToSet = shareLinkURL + encodedPinInfo;
 			var privateLinkToSet = privateLinkURL + encodedPinInfo;
 			//link shortening:
 			var request2 = gapi.client.urlshortener.url.insert({
@@ -1570,6 +1571,7 @@ emiliebarnard.com
 			$('#mapLinkButton').click(function() {
 				setLinks();
 				$('#shareBox').css("display", "inline-block");
+				$("#redditCopyText").append("(" + shareLinkToSet + ")")
 /* 				$('#closeShareBox').css("display", "inline-block"); */
 				$('#dimmer').show();
 				});
@@ -1625,6 +1627,7 @@ emiliebarnard.com
 	      ga('send', 'pageview');
 	    
 	    </script>
+	    
     
   </head>
   <body>
@@ -1646,7 +1649,8 @@ emiliebarnard.com
 	  	  	<br><br>Copy this to post as reddit comment:
 	  	  	<br>
 			<!-- Target -->
-			<textarea id="redditCopyText" rows="4" cols="30">[text goes here](link goes here)</textarea>
+			<textarea id="redditCopyText" rows="4" cols="30">[My redditgifts map]</textarea>
+			
 			
 			<!-- Trigger -->
 			<br>

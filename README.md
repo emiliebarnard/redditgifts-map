@@ -7,3 +7,5 @@ This web application uses Google's [Map API](https://developers.google.com/maps/
 Once the user drops all desired pins, he or she can then generate two links. The share link is specifically used for sharing with other people. It loads a simpler version of the redditgifts map that has no editting functionality. The private link is intended to be saved by the user so that he or she can easily revist the redditgifts map application via this link and add new pins or edit existing pins.
 ***
 Questions? Comments? Bugs? Feel free to contact me.
+***
+Note: As of 2017, Redditgifts has changed its privacy settings regarding locations. I am attempting to find a happy medium to create an interactive map without sharing too much location information. Until that happens, the general website will not be updated with new exchange information.

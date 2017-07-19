@@ -1,5 +1,5 @@
 #redditgifts map
-An open-source project created by [Emilie Menard Barnard](http://embarnard.com) \([embarnard](http://embarnard.github.io) on GitHub\).
+An open-source project created by [Emilie Menard Barnard](http://embarnard.com) \([emiliebarnard](http://emiliebarnard.github.io) on GitHub\).
 <br>Not affiliated with nor endorsed by [reddit](http://reddit.com) or [redditgifts](http://redditgifts.com).
 ***
 This web application uses Google's [Map API](https://developers.google.com/maps/) to generate a visual representation of all giftees a redditgifts user has sent gifts to. Each giftee's location is marked on the map by a redditgifts snoo pin, dictated by the exchange. Users have the option to enter additional information, such as the username for each giftee, whether the giftee was a rematch or not, and a home location.

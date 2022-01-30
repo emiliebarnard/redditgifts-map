@@ -11,3 +11,5 @@ Questions? Comments? Bugs? Feel free to contact me.
 2017 update: Redditgifts has changed its privacy settings regarding locations. I am attempting to find a happy medium to create an interactive map without sharing too much location information. Until that happens, the general website will not be updated with new exchange information.
 ***
 2020 update: While this project is no longer a priority, I hope to revisit it again in the future.
+***
+2022 update: Sadly, redditgifts has closed so this map no longer serves a purpose.
